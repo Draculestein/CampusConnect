@@ -16,21 +16,14 @@ services:
 
     ports:
       - 3306:3306
-    networks:
-      - ThothNet
 
   adminer:
     image: adminer
     ports:
       - 8000:8080
-    networks:
-      - ThothNet
+
 volumes:
   ThothVault:
-
-networks:
-  ThothNet:
-    driver: bridge
 
 secrets:
   db-root-password:
