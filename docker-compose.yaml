@@ -4,9 +4,6 @@ services:
   mariaDB:
     image: mariadb
     
-    secrets:
-      - db-root-password
-    
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=ThothDB
