@@ -8,7 +8,7 @@ services:
       - db-root-password
     
     environment:
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-root-password
+      - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=ThothDB
 
     volumes:
@@ -25,6 +25,3 @@ services:
 volumes:
   ThothVault:
 
-secrets:
-  db-root-password:
-    file: db/password.txt
