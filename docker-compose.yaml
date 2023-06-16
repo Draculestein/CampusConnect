@@ -19,7 +19,7 @@ services:
     ports:
       - 8009:8080
 
-  back-end:
+  backend:
     build: ./backend
     expose:
       - "8000:8000"
