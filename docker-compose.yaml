@@ -3,14 +3,11 @@ version: '3.1'
 services:
   mariaDB:
     image: mariadb
-    
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=ThothDB
-
     volumes:
       - ThothVault:/var/lib/mysql
-
     ports:
       - 3306:3306
 
@@ -21,8 +18,9 @@ services:
 
   backend:
     build: ./backend
-    expose:
-      - "8000:8000"
+    tty: true
+    ports:
+      - 8000:8000
     depends_on:
       - mariaDB
 
