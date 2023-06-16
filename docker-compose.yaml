@@ -22,7 +22,9 @@ services:
   back-end:
     build: ./backend
     expose:
-      - "8000"
+      - "8000:8000"
+    depends_on:
+      - mariaDB
 
 volumes:
   ThothVault:
