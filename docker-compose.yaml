@@ -19,6 +19,8 @@ services:
   backend:
     build: ./backend
     tty: true
+    volumes:
+      - ./backend:/thoth
     ports:
       - 8000:8000
     depends_on:

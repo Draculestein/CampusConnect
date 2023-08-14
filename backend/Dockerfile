@@ -1,14 +1,13 @@
 FROM python:3
 EXPOSE 8000
-WORKDIR /thoth/
+WORKDIR /thoth
 
 RUN apt-get update
 RUN apt-get -y upgrade 
 
 RUN python -m pip install --upgrade pip
 
-COPY . .
-
+COPY req.txt .
 RUN pip install -r req.txt
 
 ENTRYPOINT [ "python" ]
