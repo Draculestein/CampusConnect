@@ -1,2 +1,9 @@
 # venv files
 venv
+
+# DB data
+data
+
+# Python cache
+backend/app/__pycache__
+backend/backend/__pycache__
