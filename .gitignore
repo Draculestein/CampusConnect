@@ -5,5 +5,4 @@ venv
 data
 
 # Python cache
-backend/app/__pycache__
-backend/backend/__pycache__
+backend/thoth/thoth/__pycache__
