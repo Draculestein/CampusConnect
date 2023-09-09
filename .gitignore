@@ -6,3 +6,6 @@ data
 
 # Python cache
 backend/thoth/thoth/__pycache__
+
+#VS Code settings
+.vscode
