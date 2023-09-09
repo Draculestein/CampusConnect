@@ -11,4 +11,4 @@ COPY req.txt .
 RUN pip install -r req.txt
 
 ENTRYPOINT [ "python" ]
-CMD [ "manage.py", "runserver", "0.0.0.0:8001" ]
+CMD [ "./thoth/manage.py", "runserver", "0.0.0.0:8001" ]
