@@ -83,4 +83,12 @@ class Organization(models.Model):
     highest_temp = models.FloatField()
     num_users_enrolled = models.PositiveIntegerField()
     num_users_transferred = models.PositiveIntegerField()
-    
+
+    def __str__(self):
+        return self.name
+
+class Programs(models.Model):
+    ope6id = models.CharField(verbose_name='OPE6', validators=[RegexValidator(regex='\w{6}$', message='Has to be 6 digits', code='ope6id_no_match')])
+    cip = models.CharField(max_length=4)
+    name = models.CharField(max_length=150)
+    description = models.TextField()
