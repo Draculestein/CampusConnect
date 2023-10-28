@@ -3,6 +3,7 @@ venv
 
 # DB data
 data
+db.sqlite3
 
 # Python cache
 backend/thoth/thoth/__pycache__
