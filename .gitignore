@@ -1,11 +1,12 @@
 # venv files
-venv
+.venv
 
 # DB data
 data
+db.sqlite3
 
 # Python cache
 backend/thoth/thoth/__pycache__
 
-#VS Code settings
+# VS Code settings
 .vscode
