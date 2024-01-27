@@ -1,5 +1,5 @@
 # venv files
-venv
+.venv
 
 # DB data
 data
@@ -11,5 +11,5 @@ backend/thoth/thoth/migrations/__pycache__
 backend/thoth/db/__pycache__
 backend/thoth/statics/__pycache__
 
-#VS Code settings
+# VS Code settings
 .vscode
