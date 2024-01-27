@@ -4,69 +4,69 @@ from django.core.validators import RegexValidator
 # Create your models here.
 class Organization(models.Model):
     States_choices = [  
-('ALABAMA'     	       ,'AL'),
-('ALASKA'      	       ,'AK'),
-('AMERICAN SAMOA'	       ,'AS'),
-('ARIZONA'	           ,'AZ'),
-('ARKANSAS'	           ,'AR'),
-('CALIFORNIA'	           ,'CA'),
-('COLORADO'	           ,'CO'),
-('CONNECTICUT'	       ,'CT'),
-('DELAWARE'	           ,'DE'),
-('DISTRICT OF COLUMBIA'   ,'DC'),
-('FLORIDA'	           ,'FL'),
-('GEORGIA'	           ,'GA'),
-('GUAM'	               ,'GU'),
-('HAWAII'	               ,'HI'),
-('IDAHO'	               ,'ID'),
-('ILLINOIS'	           ,'IL'),
-('INDIANA'	           ,'IN'),
-('IOWA'	               ,'IA'),
-('KANSAS'	               ,'KS'),
-('KENTUCKY'	           ,'KY'),
-('LOUISIANA'	           ,'LA'),
-('MAINE'	               ,'ME'),
-('MARYLAND'	           ,'MD'),
-('MASSACHUSETTS'	       ,'MA'),
-('MICHIGAN'	           ,'MI'),
-('MINNESOTA'	           ,'MN'),
-('MISSISSIPPI'	       ,'MS'),
-('MISSOURI'	           ,'MO'),
-('MONTANA'	           ,'MT'),
-('NEBRASKA'	           ,'NE'),
-('NEVADA'	               ,'NV'),
-('NEW HAMPSHIRE'	       ,'NH'),
-('NEW JERSEY'	           ,'NJ'),
-('NEW MEXICO'	           ,'NM'),
-('NEW YORK'	           ,'NY'),
-('NORTH CAROLINA'	       ,'NC'),
-('NORTH DAKOTA'	       ,'ND'),
-('NORTHERN MARIANA IS'	,'MP'),
-('OHIO'	               ,'OH'),
-('OKLAHOMA'	           ,'OK'),
-('OREGON'	               ,'OR'),
-('PENNSYLVANIA'	       ,'PA'),
-('PUERTO RICO'	       ,'PR'),
-('RHODE ISLAND'	       ,'RI'),
-('SOUTH CAROLINA'	       ,'SC'),
-('SOUTH DAKOTA'	       ,'SD'),
-('TENNESSEE'	           ,'TN'),
-('TEXAS'	               ,'TX'),
-('UTAH'	               ,'UT'),
-('VERMONT'	           ,'VT'),
-('VIRGINIA'	           ,'VA'),
-('VIRGIN ISLANDS'	       ,'VI'),
-('WASHINGTON'	           ,'WA'),
-('WEST VIRGINIA'	       ,'WV'),
-('WISCONSIN'	           ,'WI'),
-('WYOMING'	           ,'WY')]
-    ope8id = models.CharField(verbose_name='OPE8', validators=[RegexValidator(regex='\w{8}$', message='Has to be 8 digits', code='ope8id_no_match')])
-    ope6id = models.CharField(verbose_name='OPE6', validators=[RegexValidator(regex='\w{6}$', message='Has to be 6 digits', code='ope6id_no_match')])
+('AL', 'ALABAMA'     	       ),
+('AK', 'ALASKA'      	       ),
+('AS', 'AMERICAN SAMOA'	   ),
+('AZ', 'ARIZONA'	           ),
+('AR', 'ARKANSAS'	           ),
+('CA', 'CALIFORNIA'	       ),
+('CO', 'COLORADO'	           ),
+('CT', 'CONNECTICUT'	       ),
+('DE', 'DELAWARE'	           ),
+('DC', 'DISTRICT OF COLUMBIA'),
+('FL', 'FLORIDA'	           ),
+('GA', 'GEORGIA'	           ),
+('GU', 'GUAM'	               ),
+('HI', 'HAWAII'	           ),
+('ID', 'IDAHO'	           ),
+('IL', 'ILLINOIS'	           ),
+('IN', 'INDIANA'	           ),
+('IA', 'IOWA'	               ),
+('KS', 'KANSAS'	           ),
+('KY', 'KENTUCKY'	           ),
+('LA', 'LOUISIANA'	       ),
+('ME', 'MAINE'	           ),
+('MD', 'MARYLAND'	           ),
+('MA', 'MASSACHUSETTS'	   ),
+('MI', 'MICHIGAN'	           ),
+('MN', 'MINNESOTA'	       ),
+('MS', 'MISSISSIPPI'	       ),
+('MO', 'MISSOURI'	           ),
+('MT', 'MONTANA'	           ),
+('NE', 'NEBRASKA'	           ),
+('NV', 'NEVADA'	           ),
+('NH', 'NEW HAMPSHIRE'	   ),
+('NJ', 'NEW JERSEY'	       ),
+('NM', 'NEW MEXICO'	       ),
+('NY', 'NEW YORK'	           ),
+('NC', 'NORTH CAROLINA'	   ),
+('ND', 'NORTH DAKOTA'	       ),
+('MP', 'NORTHERN MARIANA IS' ),
+('OH', 'OHIO'	               ),
+('OK', 'OKLAHOMA'	           ),
+('OR', 'OREGON'	           ),
+('PA', 'PENNSYLVANIA'	       ),
+('PR', 'PUERTO RICO'	       ),
+('RI', 'RHODE ISLAND'	       ),
+('SC', 'SOUTH CAROLINA'	   ),
+('SD', 'SOUTH DAKOTA'	       ),
+('TN', 'TENNESSEE'	       ),
+('TX', 'TEXAS'	           ),
+('UT', 'UTAH'	               ),
+('VT', 'VERMONT'	           ),
+('VA', 'VIRGINIA'	           ),
+('VI', 'VIRGIN ISLANDS'	   ),
+('WA', 'WASHINGTON'	       ),
+('WV', 'WEST VIRGINIA'	   ),
+('WI', 'WISCONSIN'	       ),
+('WY', 'WYOMING'	           )]
+    ope8id = models.CharField(verbose_name='OPE8', max_length=8, validators=[RegexValidator(regex='\w{8}$', message='Has to be 8 digits', code='ope8id_no_match')])
+    ope6id = models.CharField(verbose_name='OPE6', max_length=6, validators=[RegexValidator(regex='\w{6}$', message='Has to be 6 digits', code='ope6id_no_match')])
     name = models.CharField(verbose_name='Organization Name', max_length=200)
     address = models.TextField(verbose_name='Address')
     city = models.CharField(verbose_name='City', max_length=80)
     state = models.CharField(max_length=2, choices=States_choices)
-    postal_code = models.CharField(validators=[RegexValidator(regex='^\d{5}(?:[-\s]\d{4})?$', message='Invalid postal code', code='postalcode_no_match')])
+    postal_code = models.CharField(max_length=10, validators=[RegexValidator(regex='^\d{5}(?:[-\s]\d{4})?$', message='Invalid postal code', code='postalcode_no_match')])
     url = models.URLField(verbose_name='Homepage URL')
     admission_rate = models.DecimalField(max_digits=3, decimal_places=2)
     average_sat = models.FloatField()
@@ -88,7 +88,7 @@ class Organization(models.Model):
         return self.name
 
 class Programs(models.Model):
-    ope6id = models.CharField(verbose_name='OPE6', validators=[RegexValidator(regex='\w{6}$', message='Has to be 6 digits', code='ope6id_no_match')])
+    ope6id = models.CharField(verbose_name='OPE6', max_length=6, validators=[RegexValidator(regex='\w{6}$', message='Has to be 6 digits', code='ope6id_no_match')])
     cip = models.CharField(max_length=4)
     name = models.CharField(max_length=150)
     description = models.TextField()
