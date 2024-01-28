@@ -9,7 +9,9 @@ db.sqlite3
 backend/thoth/thoth/__pycache__
 backend/thoth/thoth/migrations/__pycache__
 backend/thoth/db/__pycache__
+backend/thoth/db/migrations/__pycache__
 backend/thoth/statics/__pycache__
+backend/thoth/statics/migrations/__pycache__
 
 # VS Code settings
 .vscode
