@@ -1,5 +1,8 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 class Organization(models.Model):
@@ -60,6 +63,8 @@ class Organization(models.Model):
 ('WV', 'WEST VIRGINIA'	   ),
 ('WI', 'WISCONSIN'	       ),
 ('WY', 'WYOMING'	           )]
+    
+    
     ope8id = models.CharField(verbose_name='OPE8', max_length=8, validators=[RegexValidator(regex='\w{8}$', message='Has to be 8 digits', code='ope8id_no_match')])
     ope6id = models.CharField(verbose_name='OPE6', max_length=6, validators=[RegexValidator(regex='\w{6}$', message='Has to be 6 digits', code='ope6id_no_match')])
     name = models.CharField(verbose_name='Organization Name', max_length=200)
@@ -98,3 +103,23 @@ class Programs(models.Model):
     
 class Demography(models.Model):
     pass
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    age = models.PositiveSmallIntegerField()
+    dob = models.DateTimeField()
+    grad_date = models.DateTimeField()
+    nationality = models.CharField(max_length=12)
+    race = models.CharField(max_length=10)
+    organization = models.ForeignKey(Organization, on_delete=models.DO_NOTHING)
+    
+# Signals
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()   
+    
