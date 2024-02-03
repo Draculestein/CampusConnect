@@ -1,5 +1,22 @@
 {
   "dependencies": {
     "express": "^4.18.2"
-  }
+  },
+  "name": "thoth",
+  "version": "1.0.0",
+  "description": "Thinkspace website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No test yet\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Draculestein/Thoth.git"
+  },
+  "author": "Albert Theodorus, Sam Wayne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Draculestein/Thoth/issues"
+  },
+  "homepage": "https://github.com/Draculestein/Thoth#readme"
 }
