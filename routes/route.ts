@@ -1,8 +1,8 @@
 import {Application} from "express";
-import * as home from "./home";
-import * as result from "./result";
+import homeRouter from "./home"
+import resultRouter from "./result";
 
 export default function registerRoutes(app: Application) {
-    home.register(app);
-    result.register(app);
+    app.use('/', homeRouter);
+    app.use('/result', resultRouter);
 }
