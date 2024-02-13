@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const resultRouter = Router();
 
-resultRouter.get('/result', function(req, res, next) {
+resultRouter.get('/', function(req, res, next) {
           res.render('result page', {
             content: [
               {
