@@ -261,10 +261,10 @@ body {
 }
 
 #slide1 {background-image: url('../images/harvardbuilding.png');}
-#slide2 {background-image: url('../images/uofubuilding.JPEG');}
-#slide3 {background-image: url('../images/mitbuilding.JPG');}
-#slide4 {background-image: url('../images/stanfordbuilding.JPG');}
-#slide5 {background-image: url('../images/uofwbuilding.JPG');}
+#slide2 {background-image: url('../images/uofubuilding.jpeg');}
+#slide3 {background-image: url('../images/mitbuilding.jpeg');}
+#slide4 {background-image: url('../images/stanfordbuilding.jpeg');}
+#slide5 {background-image: url('../images/uofwbuilding.jpeg');}
 #slide6 { background-color: rgba(0, 0, 0, 0.5); }
 #slide7 { background-color: #ffbf69; }
 #slide8 { background-color: #ffffff; }
