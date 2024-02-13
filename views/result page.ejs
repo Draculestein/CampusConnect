@@ -109,41 +109,15 @@
     <div id="container-result">
       <div class="page active" id="one">
         <div class="slides">
-
-          <div class="con-slide">
-            <div id="slide1" class="slide"></div>
-            <div class="img-content">
-              <img id="img1" class="img-center">
+          <% for( let index = 0; index < content.length; index++ ) { %>
+            <% var slideID = "slide" + (index + 1), imageID = "img" + (index + 1) %>
+            <div class="con-slide">
+              <div id="<%- slideID %>" class="slide" style="background-image: url('<%- content[index].background %>');"></div>
+              <div class="img-content">
+                <img id="<%- imageID %>" class="img-center" src="<%- content[index].image  %>">
+              </div>
             </div>
-          </div>
-
-          <div class="con-slide" onclick="window.location.href='info2.html'">
-            <div id="slide2" class="slide"></div>
-            <div class="img-content">
-              <img id="img2" class="img-center" src="<%- content[0].image  %>">
-            </div>
-          </div>
-
-          <div class="con-slide">
-            <div id="slide3" class="slide"></div>
-            <div class="img-content">
-              <img id="img3" class="img-center" src="<%- content[1].image  %>">
-            </div>
-          </div>
-
-          <div class="con-slide">
-            <div id="slide4" class="slide"></div>
-            <div class="img-content">
-              <img id="img4" class="img-center" src="/images/2Q.png">
-            </div>
-          </div>
-
-          <div class="con-slide">
-            <div id="slide5" class="slide"></div>
-            <div class="img-content">
-              <img id="img5" class="img-center" src="/images/2Q.png">
-            </div>
-          </div>
+          <% } %>
         </div>
       </div>
 
