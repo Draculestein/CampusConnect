@@ -1,9 +1,8 @@
-import * as express from "express";
+import {Application} from "express";
+import * as home from "./home";
+import * as result from "./result";
 
-export default function registerRoutes(app: express.Application) {
-    // define a route handler for the default home page
-    app.get("/", (req, res) => {
-        // render the index template
-        res.render("index", {title: "Hello World!"});
-    });
+export default function registerRoutes(app: Application) {
+    home.register(app);
+    result.register(app);
 }
