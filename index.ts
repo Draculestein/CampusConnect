@@ -2,10 +2,11 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import morgan from "morgan";
+import morganMiddleware from "./config/morganMiddleware";
 import { AppDataSource } from './config/db'
 import registerRoutes from "./routes/route"
 import "reflect-metadata"
+import logger from "./config/logger";
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ const port = process.env.PORT || 3000; // default port to listen
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.use(morgan('dev'));
+app.use(morganMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -27,14 +28,14 @@ registerRoutes(app);
 
 AppDataSource.initialize()
     .then(() => {
-        console.log("Data Source has been initialized!")
+        logger.info("Data Source has been initialized!");
     })
     .catch((err) => {
-        console.error("Error during Data Source initialization", err)
-    })
+        logger.error("Error during Data Source initialization:", err);
+    });
 
 // start the express server
 app.listen(port, () => {
     // tslint:disable-next-line:no-console
-    console.log(`server started at http://localhost:${port}`);
+    logger.info(`server started at http://localhost:${port}`);
 });
