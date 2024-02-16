@@ -30,9 +30,10 @@ const format = winston.format.combine(
 winston.addColors(colors);
 
 const logger = winston.createLogger({
-    levels: levels,
+    levels,
     level: level(),
-    format: format,
+    format,
+    transports: [new winston.transports.Console()]
 });
 
 export default logger;
