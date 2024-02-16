@@ -3,7 +3,7 @@ import path from "path";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import { AppDataSource } from './db'
+import { AppDataSource } from './config/db'
 import registerRoutes from "./routes/route"
 import "reflect-metadata"
 
