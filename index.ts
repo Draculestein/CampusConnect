@@ -25,6 +25,8 @@ app.use(express.static("public"));
 
 registerRoutes(app);
 
+logger.info('Log level:', process.env.LOG_LEVEL);
+
 AppDataSource.initialize()
     .then(() => {
         logger.info("Data Source has been initialized!");

@@ -17,7 +17,7 @@ const colors = {
 };
 
 const level = () => {
-    return process.env.LOG_LEVEL || 'info';
+    return 'debug';
 };
 
 const format = winston.format.combine(
