@@ -17,7 +17,7 @@ export class User {
     @Column('date')
     dob: Date;
 
-    @Column()
+    @Column('date')
     graduationDate: Date;
 
     @Column()
