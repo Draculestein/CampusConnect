@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 import morganMiddleware from "./config/morganMiddleware";
 import { AppDataSource } from './config/db'
 import registerRoutes from "./routes/route"
-import "reflect-metadata"
 import logger from "./config/logger";
 
 dotenv.config();
