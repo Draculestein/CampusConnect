@@ -14,7 +14,7 @@ export class User {
     @Column()
     age: number;
 
-    @Column()
+    @Column('date')
     dob: Date;
 
     @Column()
