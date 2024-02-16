@@ -1,8 +1,8 @@
-function search(event) {
+function search(event, resultPage) {
   if (event.key === "Enter") {
     const query = document.getElementById("search-input").value;
     // Redirect to the search results page
-    window.location.href = "search-results.html?q=" + encodeURIComponent(query);
+    window.location.href = resultPage + "?q=" + encodeURIComponent(query);
   }
 }
 

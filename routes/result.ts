@@ -6,7 +6,7 @@ resultRouter.get('/', function(req, res, next) {
           res.render('result page', {
             content: [
               {
-                image: '/images/Harvard.png',
+                image: '/images/UofU.png',
                 background : '/images/harvardbuilding.png'
               },
               {
