@@ -23,7 +23,8 @@
     "http-errors": "~1.6.3",
     "mariadb": "^3.2.3",
     "morgan": "~1.9.1",
-    "sequelize": "^6.37.0"
+    "reflect-metadata": "^0.2.1",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.6",
