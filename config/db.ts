@@ -5,5 +5,7 @@ import "reflect-metadata"
 export const AppDataSource = new DataSource({
     type: 'sqlite',
     database: 'dev.sqlite',
-    entities: ['models/*.model.js']
+    entities: ['models/*.model.js'],
+    logging: ['query', 'error'],
+    logger: 'advanced-console'
 })
