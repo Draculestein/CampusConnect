@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import registerRoutes from "./routes/route"
+import "reflect-metadata"
 
 dotenv.config();
 
