@@ -16,7 +16,7 @@ homeRouter.get("/", async (req, res) => {
     user.username = 'test_user';
     await AppDataSource.manager.save(user);
     // render the index template
-    res.render("index", { title: "Hello World!" });
+    res.render("index");
 });
 
 
