@@ -1,4 +1,6 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
+import { User } from './User.model';
+import { Program } from './Programs.model';
 
 @Entity()
 export class Organization {
@@ -54,7 +56,7 @@ export class Organization {
     onCampusExpense: number;
 
     @Column()
-    offCampusExprese: number;
+    offCampusExpense: number;
 
     @Column()
     withFamilyExpense: number;
@@ -63,7 +65,7 @@ export class Organization {
     ratioUndergradFaculty: number;
 
     @Column()
-    lowesTemp: number;
+    lowestTemp: number;
 
     @Column()
     highestTemp: number;
@@ -73,4 +75,10 @@ export class Organization {
 
     @Column()
     usersTransferredOutCount: number;
+
+    @OneToMany(() => User, (user) => user.organization)
+    users: User[];
+
+    @OneToMany(() => Program, (program) => program.organization)
+    programs: Program[];
 }

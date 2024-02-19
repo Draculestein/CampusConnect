@@ -1,11 +1,12 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToMany, ManyToOne } from 'typeorm';
+import { Organization } from './Organization.model';
 
 @Entity()
 export class Program {
     @PrimaryColumn()
     ope6id: string;
 
-    @Column()
+    @PrimaryColumn()
     cipCode: string;
 
     @Column()
@@ -13,4 +14,7 @@ export class Program {
 
     @Column()
     programDescription: string;
+
+    @ManyToOne(() => Organization, (org) => org.programs)
+    organization: Organization;
 }

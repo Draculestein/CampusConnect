@@ -1,4 +1,6 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToOne } from 'typeorm';
+import { Organization } from './Organization.model';
+import { Role } from './Roles.model';
 
 @Entity()
 export class User {
@@ -25,4 +27,10 @@ export class User {
 
     @Column()
     race: string;
+
+    @ManyToOne(() => Organization, (org) => org.users)
+    organization: Organization;
+
+    @ManyToOne(() => Role, (role) => role.users)
+    role: Role;
 }
