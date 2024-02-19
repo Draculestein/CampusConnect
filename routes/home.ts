@@ -31,13 +31,23 @@ homeRouter.post("/login", (req, res) => {
 
 // Sign up 
 homeRouter.post("/signup", (req, res) => {
-    var username = req.body.username;
+    var email = req.body.username;
     var password = req.body.password;
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var dob = req.body.birthday as Date;
+    var gender = req.body.sex;
 
-    createUserWithEmailAndPassword(auth, username, password)
+    createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
         const user = userCredential.user;
-        
+        const userId = user.uid;
+
+        const userObj = new User();
+        userObj.id = userId;
+        userObj.firstName = firstName;
+        userObj.lastName = lastName;
+        userObj.dob = dob;
     })
     .catch(error => {
 
