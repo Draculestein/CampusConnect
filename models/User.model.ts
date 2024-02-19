@@ -26,13 +26,13 @@ export class User {
     dob: Date;
 
     @Column('date')
-    graduationDate: Date;
+    graduationDate: Date | null;
 
     @Column()
-    nationality: string;
+    nationality: string | null;
 
     @Column()
-    race: string;
+    race: string | null;
 
     @ManyToOne(() => Organization, (org) => org.users)
     organization: Organization | null;
