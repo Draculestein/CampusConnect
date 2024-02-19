@@ -60,7 +60,7 @@
                                   <div id="signin-form" class="content">
                                     <span id="close-signin" class="close">&times;</span>
                                     <h1 class="h1-sign"><b>Sign In</b></h1>
-                                    <form id="signinForm" action="/action_page.php"> <!--I need to know what is this "action"-->
+                                    <form id="signinForm" action="/login" method="post"> <!--I need to know what is this "action"-->
                                       <input type="text" id="username" placeholder="Username" required>
                                       <input type="password" id="password" placeholder="Password" required>
                                       <button type="submit" id="submit-btn">Sign In</button>
@@ -96,11 +96,11 @@
                                   <div id="signup-form" class="content">
                                     <span id="close-signup" class="close">&times;</span>
                                     <h1 class="h1-sign"><b>Sign Up</b></h1>
-                                    <form id="signup-form" action="/action_page.php"> <!--I need to know what is this "action"-->
+                                    <form id="signup-form" action="/signup"> <!--I need to know what is this "action"-->
                                       
                                       <div class="col-mdf-1">
                                         <div class="col-smf-1">
-                                          <input type="text" id="first name" placeholder="First Name">
+                                          <input type="text" id="firstName" placeholder="First Name">
                                           <input type="text" id="email" placeholder="Email" required>
                                             <div class="sx-1">
                                                   <span>I am</span>
@@ -117,7 +117,7 @@
                                             </div>
                                         </div>
                                         <div class="col-smf-2">
-                                          <input type="text" id="first name" placeholder="Last Name">
+                                          <input type="text" id="lastName" placeholder="Last Name">
                                           <input type="password" id="password" placeholder="Password" required>
                                           <button type="submit" id="submup-btn">Sign Up</button>
                                           <span class="signIn">Have an account?<p> <a id="switch-to-signin" class="signIn" href="#signin-form">Sign In</a></p></span>

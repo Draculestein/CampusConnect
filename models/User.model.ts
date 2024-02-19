@@ -11,10 +11,16 @@ export class User {
     username: string;
 
     @Column()
-    name: string;
+    firstName: string;
+
+    @Column()
+    lastName: string;
 
     @Column()
     age: number;
+
+    @Column()
+    gender: string;
 
     @Column('date')
     dob: Date;
@@ -29,7 +35,7 @@ export class User {
     race: string;
 
     @ManyToOne(() => Organization, (org) => org.users)
-    organization: Organization;
+    organization: Organization | null;
 
     @ManyToOne(() => Role, (role) => role.users)
     role: Role;
