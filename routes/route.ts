@@ -1,4 +1,4 @@
-import {Application} from "express";
+import { Application } from "express";
 import homeRouter from "./home"
 import resultRouter from "./result";
 
