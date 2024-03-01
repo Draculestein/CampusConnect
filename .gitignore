@@ -67,4 +67,4 @@ dist/*
 *.sqlite
 
 # Keys
-./thinkspace-d7f77-firebase-adminsdk-wvoz9-4260183b3c.json
+thinkspace-d7f77-firebase-adminsdk-wvoz9-4260183b3c.json
