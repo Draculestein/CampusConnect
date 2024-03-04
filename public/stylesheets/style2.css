@@ -1,0 +1,409 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400');
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #2a9df4!important;
+  }
+
+
+/*---------------------------------------
+     PRE LOADER              
+-----------------------------------------*/
+.preloader.hidden {
+  display: none;
+}
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  background: none repeat scroll 0 0 #ffffff;
+}
+
+.spinner {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  position: relative;
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 45px;
+  height: 45px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 1px solid #575757;
+  border-top-color: #ffffff;
+  animation: spinner .9s linear infinite;
+}
+
+@-webkit-@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+/*---------------------------------------
+     Main          
+-----------------------------------------*/
+
+/*---------------------------------------
+   TYPOGRAPHY              
+-----------------------------------------*/
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 300;
+  line-height: normal;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  color: #353535;
+  font-size: 2em;
+}
+
+p {
+  color: #757575;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 24px;
+}
+
+
+/*---------------------------------------
+   SLIDES             
+-----------------------------------------*/
+.slider {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.navigation {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  width: 70%;
+  padding: 20px 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+.nav-item {
+  margin: auto;
+  cursor: pointer;
+  font-size: 20px;
+  position: relative;
+}
+
+.nav-item::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover::before {
+  left: 0;
+  width: 100%;
+}
+
+.nav-item.active{
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+
+.nav-item.active:hover::before {
+  width: 0;
+}
+
+.slide-container {
+  display: flex;
+  width: 500%;
+  height: 100vh;
+  transition: transform 0.7s ease-in-out;
+}
+
+.slide-page {
+  width: 20%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: /*#181818*/ /*#F2F3F4*/ /*#2a9df4*/ #ffca83;
+}
+
+.choices {
+  height: 100%;
+}
+
+.choices-container {
+  width: 50%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7);
+  width: 94%;
+  margin-top: 150px;
+}
+
+form {
+  display: flex;
+  width: 100%;
+}
+
+.big-acc-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ep {
+  font-size: .8em;
+}
+
+.acc-container {
+  width: 100%;
+  display: flex;
+}
+
+.form-min-container {
+  width: 100%;
+  margin-right: 25px;
+}
+
+.form-min-container-two {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form-group-one {
+  margin-bottom: 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"] {
+  width: 94%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-button button {
+  background-color: #2a9df4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 13px;
+}
+
+.form-button button:hover {
+  background-color: #0e7ccf;
+}
+
+.form-button input[type="submit"] {
+  background-color: #2a9df4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 25px;
+  float: right;
+}
+
+.form-button input[type="submit"]:hover {
+  background-color: #0e7ccf;
+}
+
+textarea {
+  width: 98%;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.break button {
+  background-color: #2a9df4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 11px;
+}
+
+.break button:hover {
+  background-color: #0e7ccf;
+}
+
+.break input[type="submit"] {
+  background-color: #2a9df4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 11px;
+  float: right;
+}
+
+.break input[type="submit"]:hover {
+  background-color: #0e7ccf;
+}
+
+.button button {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  transform: translateX(-50%);
+  background: none;
+  cursor: pointer;
+  border: none;
+}
+
+.button button:hover {
+  text-decoration: underline;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.accomplishments-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.accomplishments-navigation {
+  text-align: center;
+}
+
+.accomplishments-navigation ul {
+  list-style: none;
+  padding: 0;
+}
+
+.accomplishments-nav-item {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.accomplishments-nav-item.active {
+  font-weight: bold;
+}
+
+.accomplishments-slide-container {
+  display: flex;
+  transition: transform 0.7s ease-in-out;
+}
+
+.accomplishments-slide-page {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.accomplishments-slide-page h3 {
+  font-style: 'open-sans';
+  font-weight: bold;
+  margin-top: -1%;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.modal button {
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
