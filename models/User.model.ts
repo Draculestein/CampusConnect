@@ -28,11 +28,17 @@ export class User {
     @Column('date')
     graduationDate: Date | null;
 
-    @Column()
-    nationality: string | null;
+    @Column({
+        type: 'text',
+        nullable: true
+    })
+    nationality: string;
 
-    @Column()
-    race: string | null;
+    @Column({
+        type: 'text',
+        nullable: true
+    })
+    race: string;
 
     @ManyToOne(() => Organization, (org) => org.users)
     organization: Organization | null;

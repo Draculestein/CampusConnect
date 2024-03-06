@@ -8,4 +8,9 @@ homeRouter.get("/", (req, res) => {
     res.render("index");
 });
 
+homeRouter.get("/form", (req, res) => {
+    // render the index template
+    res.render("fill-in-sheet");
+});
+
 export default homeRouter;
