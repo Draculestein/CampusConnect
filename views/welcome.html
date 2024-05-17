@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Connect</title>
+  
+  <link rel="stylesheet" href="css/welcome.css">
+</head>
+
+<body>
+  <div class="slider-container">
+    <div class="slider" id="slider">
+
+      <div class="slide">
+        
+        <div class="welcome-container">
+          <h4>Congratulations! Your form has been submitted</h4>
+          <button class="button" onclick="goToNextSlide()">Continue</button>
+        </div>
+      
+      </div>
+
+      <div class="slide">
+
+        <div class="complete-container">
+          <h2>Complete Your Profile</h2>
+          <form id="profilePictureAndUsernameForm" enctype="multipart/form-data">
+            <div class="profile-picture-container" id="profilePictureContainer">
+              Profile Picture
+              <img id="profilePicturePreview" src="" alt="">
+              <input type="file" id="profilePicture" name="profilePicture" class="profile-picture-input" accept="image/*">
+            </div>  
+            <div>
+                <input type="text" id="username" name="username" placeholder="Username..." class="username-input">
+            </div>
+            
+          </form>
+                <button type="submit" id="welcomeButton" class="button" disabled>Welcome</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/welcome.js"></script>
+</body>
+
+</html>

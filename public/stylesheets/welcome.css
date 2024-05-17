@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #fbf8f6!important;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.welcome-container {
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  height: 50%;
+  width: 25%;
+}
+
+.complete-container {
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  height: 30%;
+  width: 25%;
+}
+
+.complete-container h2 {
+  text-align: center;
+}
+
+#profilePictureAndUsernameForm {
+  display: flex;
+  margin-top: 10%;
+  margin-left: 3.8%;
+}
+
+.button {
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20%;
+}
+
+.profile-picture-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 12px;
+  color: #808080;
+  margin-left: 10%;
+}
+
+.profile-picture-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.profile-picture-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.username-input {
+  margin-left: 10%;
+  margin-top: 19%;
+  height: 30%;
+  border-radius: 5px;
+  border: 1px solid #333;
+  padding-left: 5%;
+}
