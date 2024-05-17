@@ -1,8 +1,11 @@
 import { Application } from "express";
-import homeRouter from "./home"
-import resultRouter from "./result";
+import viewsRouter from "./views.route"
+import apiRouter from "./api.route";
 
 export default function registerRoutes(app: Application) {
-    app.use('/', homeRouter);
-    app.use('/result', resultRouter);
+    // Views
+    app.use('/', viewsRouter);
+
+    // API
+    app.use('/api', apiRouter);
 }
