@@ -104,5 +104,5 @@
   },
   "include": [
     "src/*"
-, "index.ts"  ]
+, "server.ts"  ]
 }

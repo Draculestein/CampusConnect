@@ -10,7 +10,7 @@ viewsRouter.get("/", (req, res) => {
 
 // Signup page
 viewsRouter.get("/signup", (req, res) => {
- 
+
 });
 
 // Login page
