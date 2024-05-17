@@ -25,7 +25,7 @@ viewsRouter.get("/form", (req, res) => {
 });
 
 // University search result page
-viewsRouter.get('/result', function(req, res, next) {
+viewsRouter.get('/result', (req, res, next) => {
     res.render('result_page', {
       content: [
         {
