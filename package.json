@@ -2,7 +2,7 @@
   "name": "codebase",
   "version": "0.0.0",
   "private": true,
-  "main": "dist/index.js",
+  "main": "dist/server.js",
   "scripts": {
     "clean": "rimraf dist/*",
     "copy-assets": "ts-node tools/copyAssets",
@@ -15,6 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "argon2": "^0.40.1",
     "axios": "^1.6.8",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -22,6 +23,7 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "http-errors": "~1.6.3",
+    "jsonwebtoken": "^9.0.2",
     "mariadb": "^3.2.3",
     "morgan": "~1.9.1",
     "reflect-metadata": "^0.2.1",
