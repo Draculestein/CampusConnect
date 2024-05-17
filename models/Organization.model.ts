@@ -1,11 +1,11 @@
-import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { User } from './User.model';
 import { Program } from './Programs.model';
 
 @Entity()
 export class Organization {
-    @PrimaryColumn()
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Column()
     ope8id: string;

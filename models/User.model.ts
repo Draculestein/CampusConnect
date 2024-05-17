@@ -1,14 +1,21 @@
-import { Entity, PrimaryColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Generated } from 'typeorm';
 import { Organization } from './Organization.model';
 import { Role } from './Roles.model';
 
 @Entity()
 export class User {
-    @PrimaryColumn()
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column({ unique: true })
+    @Generated('uuid')
+    uuid: string;
 
     @Column()
-    username: string;
+    email: string;
+
+    @Column()
+    password: string;
 
     @Column()
     firstName: string;
