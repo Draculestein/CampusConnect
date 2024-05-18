@@ -10,12 +10,12 @@ viewsRouter.get("/", (req: Request, res: Response) => {
 
 // Signup page
 viewsRouter.get("/signup", (req: Request, res: Response) => {
-
+  res.render('sign_up');
 });
 
 // Login page
 viewsRouter.get("/login", (req: Request, res: Response) => {
-
+  res.render('log_in');
 });
 
 // Form page

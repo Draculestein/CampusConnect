@@ -5,9 +5,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
-    if (!updateRequirementIndicators(password)) {
+    if (updateRequirementIndicators(password)) {
       alert('Password does not meet the requirements.');
       return;
     }
@@ -21,7 +23,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // JSON request.
 
     alert('Form is valid!');
-    // Users can submit the form.
+
+    fetch('/api/signup', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+        firstName,
+        lastName
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    });
+    
   });
 });
 
@@ -34,15 +49,21 @@ function updateRequirementIndicators(password) {
     symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password)
   };
 
+  var allRequirementsMet = true;
   Object.keys(requirements).forEach(key => {
     const requirementMet = requirements[key];
     const element = document.getElementById(key);
     if (requirementMet) {
       element.classList.add('valid-requirement');
+      allRequirementsMet = allRequirementsMet && true;
     } else {
       element.classList.remove('valid-requirement');
+      allRequirementsMet = allRequirementsMet && false;
     }
   });
+
+  // TODO : Return if all requirements are met. Maybe use for loop to check
+  return allRequirementsMet;
 }
 
 // Call this function whenever the password input changes

@@ -24,11 +24,13 @@ export class User {
     lastName: string;
 
     @Column({
+        type: 'int',
         nullable: true
     })
     age: number | null;
 
     @Column({
+        type: 'text',
         nullable: true
     })
     gender: string | null;
