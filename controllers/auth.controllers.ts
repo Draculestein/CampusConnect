@@ -18,9 +18,37 @@ export async function signUpWithEmailAndPassword(req: Request, res: Response) {
     try {
         await UserRepository.save(newUser);
 
-        res.status(200).send('Successful Sign Up with Email and Password');
+        res.status(200).send('Successful sign up with email and password');
     } catch (error) {
-        res.status(500).send('Error Signing Up with Email and Password');
+        logger.error(error);
+        res.status(500).send('Error signing up with email and password');
+    }
+
+}
+
+export async function signInWithEmailAndPassword(req: Request, res: Response) {
+    const { email, password } = req.body;
+
+    try {
+        const result = await UserRepository.findOne({
+            where: {
+                email
+            }
+        });
+
+        if(result == null)
+            res.status(401).send('Unauthenticated');
+
+        const verifyResult = await argon2.verify(result?.password!, password);
+
+        if(verifyResult)
+            res.status(200).send('Login successful');
+        else
+            res.status(401).send('Unauthenticated');
+    } catch (error) {
+        logger.error(error);
+        res.status(500).send('Error signing in with email and password');
+
     }
 
 }
