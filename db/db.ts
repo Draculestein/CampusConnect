@@ -1,10 +1,10 @@
 import { DataSource } from "typeorm";
-import { User } from '../models/User.model';
-import { Organization } from '../models/Organization.model';
-import { Permission } from '../models/Permission.model';
-import { Program } from '../models/Programs.model';
-import { Demography } from '../models/Demography.model';
-import { Role } from '../models/Roles.model';
+import { User } from './models/User.model';
+import { Organization } from './models/Organization.model';
+import { Permission } from './models/Permission.model';
+import { Program } from './models/Programs.model';
+import { Demography } from './models/Demography.model';
+import { Role } from './models/Roles.model';
 
 import "reflect-metadata"
 

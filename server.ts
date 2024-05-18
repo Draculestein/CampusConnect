@@ -3,7 +3,7 @@ import path from "path";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import morganMiddleware from "./middleware/morgan.middleware";
-import { AppDataSource } from './config/db'
+import { AppDataSource } from './db/db'
 import registerRoutes from "./routes/route"
 import logger from "./config/logger";
 

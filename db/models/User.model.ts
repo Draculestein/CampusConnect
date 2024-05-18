@@ -23,16 +23,26 @@ export class User {
     @Column()
     lastName: string;
 
-    @Column()
-    age: number;
+    @Column({
+        nullable: true
+    })
+    age: number | null;
 
-    @Column()
-    gender: string;
+    @Column({
+        nullable: true
+    })
+    gender: string | null;
 
-    @Column('date')
-    dob: Date;
+    @Column({
+        type: 'date',
+        nullable: true
+    })
+    dob: Date | null;
 
-    @Column('date')
+    @Column({
+        type: 'date',
+        nullable: true
+    })
     graduationDate: Date | null;
 
     @Column({

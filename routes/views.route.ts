@@ -1,31 +1,31 @@
-import { Router } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 
 const viewsRouter = Router();
 
 // Home page
-viewsRouter.get("/", (req, res) => {
+viewsRouter.get("/", (req: Request, res: Response) => {
     // render the index template
     res.render("index");
 });
 
 // Signup page
-viewsRouter.get("/signup", (req, res) => {
+viewsRouter.get("/signup", (req: Request, res: Response) => {
 
 });
 
 // Login page
-viewsRouter.get("/login", (req, res) => {
+viewsRouter.get("/login", (req: Request, res: Response) => {
 
 });
 
 // Form page
-viewsRouter.get("/form", (req, res) => {
+viewsRouter.get("/form", (req: Request, res: Response) => {
     // render the index template
     res.render("fill-in-sheet");
 });
 
 // University search result page
-viewsRouter.get('/result', (req, res, next) => {
+viewsRouter.get('/result', (req: Request, res: Response, next: NextFunction) => {
     res.render('result_page', {
       content: [
         {
