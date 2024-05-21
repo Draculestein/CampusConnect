@@ -68,6 +68,7 @@ dist/*
 
 # Keys
 thinkspace-d7f77-firebase-adminsdk-wvoz9-4260183b3c.json
+
 # Devenv
 .devenv*
 devenv.local.nix
