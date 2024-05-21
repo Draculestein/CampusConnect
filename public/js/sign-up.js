@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   const signUpButton = document.getElementById('submit-button');
+  const passwordField = document.getElementById('password');
+
+  passwordField.addEventListener('input', function () {
+    updateRequirementIndicators(passwordField.value);
+  });
+
   signUpButton.addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -9,7 +15,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const lastName = document.getElementById('lastName').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
-    if (updateRequirementIndicators(password)) {
+    if (!updateRequirementIndicators(password)) {
       alert('Password does not meet the requirements.');
       return;
     }
@@ -18,9 +24,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       alert('Passwords do not match.');
       return;
     }
-
-    // If the form is valid, you might want to proceed with form submission,
-    // JSON request.
 
     alert('Form is valid!');
 
@@ -36,37 +39,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
         'Content-type': 'application/json; charset=UTF-8'
       }
     });
-    
   });
-});
 
-function updateRequirementIndicators(password) {
-  const requirements = {
-    minLength: password.length >= 12,
-    uppercase: /[A-Z]/.test(password),
-    lowercase: /[a-z]/.test(password),
-    number: /[0-9]/.test(password),
-    symbol: /[!@#$%^&*(),.?":{}|<>]/.test(password)
-  };
+  function updateRequirementIndicators(password) {
+    const requirements = [
+      { regex: /.{12,}/, elementId: 'minLength' },
+      { regex: /[A-Z]/, elementId: 'uppercase' },
+      { regex: /[a-z]/, elementId: 'lowercase' },
+      { regex: /[0-9]/, elementId: 'number' },
+      { regex: /[^A-Za-z0-9]/, elementId: 'symbol' }
+    ];
 
-  var allRequirementsMet = true;
-  Object.keys(requirements).forEach(key => {
-    const requirementMet = requirements[key];
-    const element = document.getElementById(key);
-    if (requirementMet) {
-      element.classList.add('valid-requirement');
-      allRequirementsMet = allRequirementsMet && true;
-    } else {
-      element.classList.remove('valid-requirement');
-      allRequirementsMet = allRequirementsMet && false;
+    let allValid = true;
+
+    for (let requirement of requirements) {
+      const element = document.getElementById(requirement.elementId);
+      if (requirement.regex.test(password)) {
+        element.classList.add('valid-requirement');
+      } else {
+        element.classList.remove('valid-requirement');
+        allValid = false;
+      }
     }
-  });
 
-  // TODO : Return if all requirements are met. Maybe use for loop to check
-  return allRequirementsMet;
-}
-
-// Call this function whenever the password input changes
-document.getElementById('password').addEventListener('input', function (e) {
-  updateRequirementIndicators(e.target.value);
+    return allValid;
+  }
 });

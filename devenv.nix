@@ -1,31 +1,34 @@
 { pkgs, lib, config, inputs, ... }:
 
 {
-  # https://devenv.sh/basics/
-  env.GREET = "devenv";
-
   cachix.enable = false;
   dotenv.enable = true;
 
   # https://devenv.sh/packages/
   packages = with pkgs; [ 
     git
-    nodejs
   ];
 
   # https://devenv.sh/scripts/
-  scripts.hello.exec = "echo hello from $GREET";
+  scripts.hello.exec = "echo 'CampusConnect Dev Shell'";
 
   enterShell = ''
     hello
-    git --version
   '';
 
+  languages.javascript = {
+    enable = true;
+    npm.enable = true;
+    npm.install.enable = true;
+  };
+
+  languages.typescript.enable = true;
+
   # https://devenv.sh/tests/
-  enterTest = ''
-    echo "Running tests"
-    git --version | grep "2.44.0"
-  '';
+  # enterTest = ''
+  #   echo "Running tests"
+  #   git --version | grep "2.44.0"
+  # '';
 
   # https://devenv.sh/services/
   # services.postgres.enable = true;
