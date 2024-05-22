@@ -782,10 +782,10 @@ function handleSubmit(event) {
 
   if (userSignedIn === 'true') {
     // If the user has signed in, redirect to congratulations.html
-    window.location.href = 'congratulations.html';
+    window.location.href = '/congratulations';
   } else {
     // If the user has not signed in, redirect to welcome.html
-    window.location.href = 'welcome.html';
+    window.location.href = '/welcome';
   }
 }
 

@@ -21,7 +21,7 @@ viewsRouter.get("/login", (req: Request, res: Response) => {
 // Form page
 viewsRouter.get("/form", (req: Request, res: Response) => {
     // render the index template
-    res.render("fill-in-sheet");
+    res.render("form");
 });
 
 // University search result page
@@ -52,4 +52,19 @@ viewsRouter.get('/result', (req: Request, res: Response, next: NextFunction) => 
     });
   });
 
+viewsRouter.get('/welcome', (req: Request, res: Response, next: NextFunction) => {
+  res.render('welcome');
+});
+
+viewsRouter.get('/congratulations', (req: Request, res: Response, next: NextFunction) => {
+  res.render('congratulations');
+});
+
+viewsRouter.get('/home', (req: Request, res: Response, next: NextFunction) => {
+  res.render('home_page');
+});
+
+viewsRouter.get('/uni', (req: Request, res: Response, next: NextFunction) => {
+  res.render('university_of_utah');
+});
 export default viewsRouter;
