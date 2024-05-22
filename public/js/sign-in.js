@@ -17,7 +17,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-function simulateLogin(email, password) {
+async function simulateLogin(email, password) {
   // This function for checking wheter or not the email and password are already in the database or not.
+  const response = await fetch('/api/login', {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8'
+    }
+  });
 
-}
+  console.log(response);
+}});

@@ -25,9 +25,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
       return;
     }
 
-    alert('Form is valid!');
+    signupAPI(email, password, firstName, lastName);
+    
+  });
 
-    fetch('/api/signup', {
+  async function signupAPI(email, password, firstName, lastName) {
+    const response = await fetch('/api/signup', {
       method: 'POST',
       body: JSON.stringify({
         email,
@@ -39,7 +42,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         'Content-type': 'application/json; charset=UTF-8'
       }
     });
-  });
+
+    console.log(response);
+  };
 
   function updateRequirementIndicators(password) {
     const requirements = [
