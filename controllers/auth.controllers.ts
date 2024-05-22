@@ -36,12 +36,14 @@ export async function signInWithEmailAndPassword(req: Request, res: Response) {
             }
         });
 
-        if(result == null)
+        if (result == null) {
             res.status(401).send('Unauthenticated');
+            return;
+        }
 
         const verifyResult = await argon2.verify(result?.password!, password);
 
-        if(verifyResult)
+        if (verifyResult)
             res.status(200).send('Login successful');
         else
             res.status(401).send('Unauthenticated');
