@@ -71,7 +71,12 @@ The main files and directories are displayed below.
   - `images`: contains image files. Files are served using the `/images/{name}` path.
   - `js`: contains Javascript files for frontend. Files are served using the `/js/{name}.js` path.
 - `routes`: contains [router](https://expressjs.com/en/guide/routing.html#:~:text=express.Router&text=A%20Router%20instance%20is%20a,path%20in%20the%20main%20app.) files. All route objects are registered in `route.ts`. Route objects can be defined in their own files. The file name follows the formal `{name}.route.ts`.
+- `views`: contains HTML code for frontend. Files should be `.ejs` files for server-side rendering.
 
 ## Libraries Used
-- Express.js ([documentation](https://expressjs.com/))
-- TypeORM ([documentation](https://typeorm.io/))
+- Express.js ([documentation](https://expressjs.com/)): web server
+- TypeORM ([documentation](https://typeorm.io/)): ORM
+- MySQL MariaDB ([documentation](https://mariadb.com/kb/en/documentation/)): database engine
+- Morgan ([documentation](https://github.com/expressjs/morgan)): Logger for Node.js
+- dotenv ([documentation](https://www.npmjs.com/package/dotenv)): environment variables management
+- 
