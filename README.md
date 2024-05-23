@@ -74,9 +74,10 @@ The main files and directories are displayed below.
 - `views`: contains HTML code for frontend. Files should be `.ejs` files for server-side rendering.
 
 ## Libraries Used
+- argon2: ([documentation](https://www.npmjs.com/package/argon2)): argon2 hash for password.
 - Express.js ([documentation](https://expressjs.com/)): web server
 - TypeORM ([documentation](https://typeorm.io/)): ORM
 - MySQL MariaDB ([documentation](https://mariadb.com/kb/en/documentation/)): database engine
-- Morgan ([documentation](https://github.com/expressjs/morgan)): Logger for Node.js
 - dotenv ([documentation](https://www.npmjs.com/package/dotenv)): environment variables management
-- 
+- jsonwebtoken ([documentation](https://www.npmjs.com/package/jsonwebtoken)): JWT functionality
+- winston ([documentation](https://www.npmjs.com/package/winston)): logger for Node.js
