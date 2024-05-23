@@ -66,4 +66,12 @@ The main files and directories are displayed below.
   - `repositories`: contains TypeORM repositories to extend functionality of Entity classes. See [TypeORM's custom repository](https://typeorm.io/custom-repository). All files in this directory should be named in the format of `{name}.repositories.ts`.
 - `dist`: contains the transpiled Javascript from compiling Typescript.
 - `middleware`: contains [middleware](https://expressjs.com/en/guide/writing-middleware.html#:~:text=Middleware%20functions%20are%20functions%20that,middleware%20succeeding%20the%20current%20middleware.) functions. All files in this directory should be named in the format of `{name}.middleware.ts`.
-- `public`: contains files used for the frontend.
+- `public`: contains files used for the frontend. This folder contains three subfolders:
+  - `css`: contains css files. Files are served using the `/css/{name}.css` path.
+  - `images`: contains image files. Files are served using the `/images/{name}` path.
+  - `js`: contains Javascript files for frontend. Files are served using the `/js/{name}.js` path.
+- `routes`: contains [router](https://expressjs.com/en/guide/routing.html#:~:text=express.Router&text=A%20Router%20instance%20is%20a,path%20in%20the%20main%20app.) files. All route objects are registered in `route.ts`. Route objects can be defined in their own files. The file name follows the formal `{name}.route.ts`.
+
+## Libraries Used
+- Express.js ([documentation](https://expressjs.com/))
+- TypeORM ([documentation](https://typeorm.io/))

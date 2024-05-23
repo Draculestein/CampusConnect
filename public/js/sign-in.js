@@ -30,5 +30,5 @@ async function simulateLogin(email, password) {
     }
   });
 
-  console.log(response);
+  console.log(await response.json());
 }});

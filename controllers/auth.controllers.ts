@@ -4,8 +4,9 @@ import { User } from '../db/models/User.model';
 import * as argon2 from 'argon2';
 import { UserRepository } from '../db/repositories/User.repositories';
 import logger from '../config/logger';
+import { jwtSecret } from '../server';
 
-const jwtSecret = process.env.JWT_SECRET;
+logger.info('JWT: ' + jwtSecret);
 
 export async function signUpWithEmailAndPassword(req: Request, res: Response) {
     const { firstName, lastName, email, password } = req.body;
@@ -18,7 +19,7 @@ export async function signUpWithEmailAndPassword(req: Request, res: Response) {
         });
 
         if (result != null) {
-            res.status(403).json({ message: 'Email is already associated with an account' });
+            res.status(403).json({ message: 'Email is already associated with an account!' });
             return;
         }
 
@@ -30,10 +31,10 @@ export async function signUpWithEmailAndPassword(req: Request, res: Response) {
 
         await UserRepository.save(newUser);
 
-        res.status(200).json({ message: 'Successful sign up with email and password' });
+        res.status(200).json({ message: 'Successful sign up with email and password!' });
     } catch (error) {
         logger.error(error);
-        res.status(500).json({ message: 'Error signing up with email and password' });
+        res.status(500).json({ message: 'Error signing up with email and password!' });
     };
 
 }
@@ -49,7 +50,7 @@ export async function signInWithEmailAndPassword(req: Request, res: Response) {
         });
 
         if (result == null) {
-            res.status(401).json({ message: 'Unauthenticated' });
+            res.status(401).json({ message: 'Unauthenticated!' });
             return;
         }
 
@@ -64,17 +65,17 @@ export async function signInWithEmailAndPassword(req: Request, res: Response) {
                 {
                     expiresIn: 86400
                 });
-            res.status(200).json({ 
+            res.status(200).json({
                 message: 'Login successful',
-                accessToken  
+                accessToken
             });
             return;
         }
         else
-            res.status(401).json({ message: 'Unauthenticated' });
+            res.status(401).json({ message: 'Unauthenticated!' });
     } catch (error) {
         logger.error(error);
-        res.status(500).json({ message: 'Error signing in with email and password' });
+        res.status(500).json({ message: 'Error signing in with email and password!' });
 
     };
 }

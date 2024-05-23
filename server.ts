@@ -1,13 +1,14 @@
+require('dotenv').config();
 import express from "express";
 import path from "path";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import morganMiddleware from "./middleware/morgan.middleware";
 import { AppDataSource } from './db/db'
 import registerRoutes from "./routes/route"
 import logger from "./config/logger";
 
-dotenv.config();
+export const logLevel = process.env.LOG_LEVEL;
+export const jwtSecret = process.env.JWT_SECRET;
 
 const app = express();
 const port = process.env.PORT || 3000; // default port to listen
@@ -26,6 +27,7 @@ app.use(express.static("public"));
 registerRoutes(app);
 
 logger.info('Log level:', process.env.LOG_LEVEL);
+logger.info('JWT Secret: ', jwtSecret);
 
 AppDataSource.initialize()
     .then(() => {

@@ -43,7 +43,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }
     });
 
-    console.log(response);
+    if(response.ok) {
+      alert('Signup successful! Please login to continue')
+      window.location.href = '/login';
+    }
+    else {
+      const json = await response.json();
+      alert(json.message);
+    }
   };
 
   function updateRequirementIndicators(password) {
