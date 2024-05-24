@@ -1,7 +1,10 @@
 # Campus Connect
 
 ## Table of Content
-
+- [Project Architecture](#project-architecture)
+- [Setup Guide](#setup-guide)
+- [Poject Structure](#project-structure)
+- [Libraries Used](#libraries-used)
 ## Project Architecture
 
 Frontend: HTML, CSS, Javascript, and React. 
