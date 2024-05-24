@@ -4,9 +4,6 @@ import { User } from '../db/models/User.model';
 import * as argon2 from 'argon2';
 import { UserRepository } from '../db/repositories/User.repositories';
 import logger from '../config/logger';
-import { jwtSecret } from '../server';
-
-logger.info('JWT: ' + jwtSecret);
 
 export async function signUpWithEmailAndPassword(req: Request, res: Response) {
     const { firstName, lastName, email, password } = req.body;
@@ -61,7 +58,7 @@ export async function signInWithEmailAndPassword(req: Request, res: Response) {
                 {
                     id: result.uuid
                 },
-                jwtSecret!,
+                process.env.JWT_SECRET!,
                 {
                     expiresIn: 86400
                 });
