@@ -52,14 +52,6 @@ viewsRouter.get('/result', (req: Request, res: Response, next: NextFunction) => 
     });
   });
 
-viewsRouter.get('/welcome', (req: Request, res: Response, next: NextFunction) => {
-  res.render('welcome');
-});
-
-viewsRouter.get('/congratulations', (req: Request, res: Response, next: NextFunction) => {
-  res.render('congratulations');
-});
-
 viewsRouter.get('/home', (req: Request, res: Response, next: NextFunction) => {
   res.render('home_page');
 });
