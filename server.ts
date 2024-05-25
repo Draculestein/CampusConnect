@@ -7,6 +7,7 @@ import morganMiddleware from "./middleware/morgan.middleware";
 import { AppDataSource } from './db/db'
 import registerRoutes from "./routes/route"
 import logger from "./config/logger";
+import passport from "passport";
 
 const app = express();
 const port = process.env.PORT || 3000; // default port to listen
@@ -23,8 +24,12 @@ app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET!,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { maxAge: 10000000}
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static("public"));
 
