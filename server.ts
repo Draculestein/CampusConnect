@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 import morganMiddleware from "./middleware/morgan.middleware";
 import { AppDataSource } from './db/db'
 import registerRoutes from "./routes/route"
@@ -18,6 +19,12 @@ app.use(morganMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(session({
+    secret: process.env.SESSION_SECRET!,
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.use(express.static("public"));
 
