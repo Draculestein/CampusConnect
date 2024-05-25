@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import { User } from '../db/models/User.model';
 import * as argon2 from 'argon2';
+import passport, { DoneCallback } from 'passport';
+import { Strategy } from 'passport-local';
 import { UserRepository } from '../db/repositories/User.repositories';
 import logger from '../config/logger';
 
@@ -54,17 +55,9 @@ export async function signInWithEmailAndPassword(req: Request, res: Response) {
         const verifyResult = await argon2.verify(result?.password!, password);
 
         if (verifyResult) {
-            const accessToken = jwt.sign(
-                {
-                    id: result.uuid
-                },
-                process.env.JWT_SECRET!,
-                {
-                    expiresIn: 86400
-                });
+
             res.status(200).json({
                 message: 'Login successful',
-                accessToken
             });
             return;
         }
@@ -76,3 +69,43 @@ export async function signInWithEmailAndPassword(req: Request, res: Response) {
 
     };
 }
+
+passport.use(
+    new Strategy(async (username, password, done) => {
+        try {
+            const result = await UserRepository.findOne({
+                where: {
+                    email: username
+                }
+            });
+
+            if (result == null) {
+                return done(null, false, { message: 'Incorrect username or password.' });
+            }
+
+            const verifyResult = await argon2.verify(result?.password!, password);
+            if (verifyResult) return done(null, result); else return done(null, false, { message: 'Incorrect username or password.' });
+        } catch (error) {
+            logger.error(error);
+            return done(error, false);
+        };
+    })
+);
+
+passport.serializeUser((user: Express.User, done: DoneCallback) => {
+    done(null, user);
+});
+
+passport.deserializeUser(async (username: string, done) => {
+    try {
+        const user = await UserRepository.findOne({
+            where: {
+                email: username
+            }
+        });
+
+        if (user) done(null, user); else throw new Error('User does not exist');
+    } catch (error) {
+        done(error, false);
+    }
+});
