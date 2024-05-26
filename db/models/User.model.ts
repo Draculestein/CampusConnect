@@ -14,7 +14,10 @@ export class User {
     @Column()
     email: string;
 
-    @Column()
+    @Column({
+        type: 'text',
+        nullable: true
+    })
     username: string;
 
     @Column()
