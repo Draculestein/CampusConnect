@@ -17,5 +17,5 @@ export const AppDataSource = new DataSource({
     logging: ['query', 'error'],
     logger: 'advanced-console',
     synchronize: true,
-    dropSchema: true
+    dropSchema: false
 })
