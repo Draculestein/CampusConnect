@@ -3,11 +3,21 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import { TypeormStore } from "connect-typeorm";
+import { SessionRepository } from "./db/repositories/Session.repositories";
 import morganMiddleware from "./middleware/morgan.middleware";
 import { AppDataSource } from './db/db'
 import registerRoutes from "./routes/route"
 import logger from "./config/logger";
 import passport from "passport";
+
+AppDataSource.initialize()
+    .then(() => {
+        logger.info("Data Source has been initialized!");
+    })
+    .catch((err) => {
+        logger.error("Error during Data Source initialization:", err);
+    });
 
 const app = express();
 const port = process.env.PORT || 3000; // default port to listen
@@ -25,7 +35,11 @@ app.use(session({
     secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 10000000}
+    store: new TypeormStore({
+        cleanupLimit: 2,
+        limitSubquery: false, // If using MariaDB.
+        ttl: 86400
+    }).connect(SessionRepository)
 }));
 
 app.use(passport.initialize());
@@ -35,13 +49,7 @@ app.use(express.static("public"));
 
 registerRoutes(app);
 
-AppDataSource.initialize()
-    .then(() => {
-        logger.info("Data Source has been initialized!");
-    })
-    .catch((err) => {
-        logger.error("Error during Data Source initialization:", err);
-    });
+
 
 // start the express server
 app.listen(port, () => {
