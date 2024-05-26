@@ -29,6 +29,7 @@ async function simulateLogin(email, password) {
       'Content-type': 'application/json; charset=UTF-8'
     }
   });
-
-  console.log(await response.json());
+  
+  if(response.ok && response.redirected)
+    location.href = response.url;
 }});
