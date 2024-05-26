@@ -70,7 +70,7 @@ export async function signInWithEmailAndPassword(req: Request, res: Response) {
     };
 }
 
-passport.use(
+passport.use('local-signin',
     new Strategy(async (username, password, done) => {
         try {
             const result = await UserRepository.findOne({
@@ -84,7 +84,10 @@ passport.use(
             }
 
             const verifyResult = await argon2.verify(result?.password!, password);
-            if (verifyResult) return done(null, result); else return done(null, false, { message: 'Incorrect username or password.' });
+            if (verifyResult)
+                return done(null, result);
+            else
+                return done(null, false, { message: 'Incorrect username or password.' });
         } catch (error) {
             logger.error(error);
             return done(error, false);
