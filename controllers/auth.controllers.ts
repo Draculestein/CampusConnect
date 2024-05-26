@@ -76,11 +76,12 @@ export async function signInWithEmailAndPassword(req: Request, res: Response) {
 }
 
 passport.use('local-signin',
-    new Strategy(async (username, password, done) => {
+    new Strategy({ usernameField: 'email' }, async (email, password, done) => {
+        logger.info('In local-signin');
         try {
             const result = await UserRepository.findOne({
                 where: {
-                    email: username
+                    email
                 }
             });
 
@@ -103,11 +104,13 @@ passport.use('local-signin',
     })
 );
 
-passport.serializeUser((user: Express.User, done: DoneCallback) => {
+passport.serializeUser((user, done) => {
+    logger.info('Serialize: \n' + JSON.stringify(user));
     done(null, user);
 });
 
 passport.deserializeUser(async (user: UserResult, done) => {
+    logger.info('Deserialize: \n' + JSON.stringify(user));
     try {
         const result = await UserRepository.findOne({
             where: {
