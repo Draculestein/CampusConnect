@@ -42,42 +42,9 @@ export async function signUpWithEmailAndPassword(req: Request, res: Response) {
 
 }
 
-export async function signInWithEmailAndPassword(req: Request, res: Response) {
-    const { email, password } = req.body;
-
-    try {
-        const result = await UserRepository.findOne({
-            where: {
-                email
-            }
-        });
-
-        if (result == null) {
-            res.status(401).json({ message: 'Unauthenticated!' });
-            return;
-        }
-
-        const verifyResult = await argon2.verify(result?.password!, password);
-
-        if (verifyResult) {
-
-            res.status(200).json({
-                message: 'Login successful',
-            });
-            return;
-        }
-        else
-            res.status(401).json({ message: 'Unauthenticated!' });
-    } catch (error) {
-        logger.error(error);
-        res.status(500).json({ message: 'Error signing in with email and password!' });
-
-    };
-}
-
 passport.use('local-signin',
     new Strategy({ usernameField: 'email' }, async (email, password, done) => {
-        logger.info('In local-signin');
+        // logger.info('In local-signin');
         try {
             const result = await UserRepository.findOne({
                 where: {
@@ -105,12 +72,12 @@ passport.use('local-signin',
 );
 
 passport.serializeUser((user, done) => {
-    logger.info('Serialize: \n' + JSON.stringify(user));
+    // logger.info('Serialize: \n' + JSON.stringify(user));
     done(null, user);
 });
 
 passport.deserializeUser(async (user: UserResult, done) => {
-    logger.info('Deserialize: \n' + JSON.stringify(user));
+    // logger.info('Deserialize: \n' + JSON.stringify(user));
     try {
         const result = await UserRepository.findOne({
             where: {
