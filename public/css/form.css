@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400');
-
-  body {
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background: #2a9df4!important;
-  }
-
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #2a9df4 !important;
+}
 
 /*---------------------------------------
      PRE LOADER              
@@ -52,10 +50,10 @@
   animation: spinner .9s linear infinite;
 }
 
-
-
 @keyframes spinner {
-  to {transform: rotate(360deg);}
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /*---------------------------------------
@@ -66,7 +64,7 @@
    TYPOGRAPHY              
 -----------------------------------------*/
 
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
   line-height: normal;
 }
@@ -87,15 +85,14 @@ p {
   line-height: 24px;
 }
 
-
 /*---------------------------------------
    SLIDES             
 -----------------------------------------*/
 .slider {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
 .navigation {
@@ -146,7 +143,7 @@ a:hover {
   width: 100%;
 }
 
-.nav-item.active{
+.nav-item.active {
   font-weight: bold;
   border-bottom: 2px solid black;
 }
@@ -167,7 +164,7 @@ a:hover {
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  background-color: /*#181818*/ /*#F2F3F4*/ /*#2a9df4*/ #ffca83/*#fbf8f6*/;
+  background-color: #ffca83;
 }
 
 .choices {
@@ -447,7 +444,7 @@ input[type=number] {
   font-size: 12px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 
-   /* Position the tooltip */
+  /* Position the tooltip */
   position: absolute;
   z-index: 1;
   margin-top: -2%;
@@ -469,7 +466,7 @@ input[type=number] {
   font-size: 12px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 
-   /* Position the tooltip */
+  /* Position the tooltip */
   position: absolute;
   z-index: 1;
   margin-top: -.5%;
@@ -504,7 +501,7 @@ input[type=number] {
   font-size: 12px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 
-   /* Position the tooltip */
+  /* Position the tooltip */
   position: absolute;
   z-index: 1;
   margin-top: -.5%;
@@ -513,4 +510,10 @@ input[type=number] {
 
 .tooltip1:hover .tooltiptext1 {
   visibility: visible;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
 }
