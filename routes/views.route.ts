@@ -1,4 +1,14 @@
 import { Router, Request, Response, NextFunction } from "express";
+import { expectLogin } from '../middleware/auth.middleware';
+import session from 'express-session';
+import logger from "../config/logger";
+
+declare module 'express-session' {
+  export interface SessionData {
+    redirect: string;
+  }
+}
+
 
 const viewsRouter = Router();
 
@@ -18,10 +28,14 @@ viewsRouter.get("/login", (req: Request, res: Response) => {
   res.render('log_in');
 });
 
+viewsRouter.get('/logout', (req, res, next) => {
+  req.logout((err) => logger.error(err));
+  res.send('Log out successful');
+});
+
 // Form page
-viewsRouter.get("/form", (req: Request, res: Response) => {
-    // render the index template
-    res.render("form");
+viewsRouter.get("/form", expectLogin, (req: Request, res: Response) => {
+  res.render("form");
 });
 
 // University search result page
@@ -52,7 +66,7 @@ viewsRouter.get('/result', (req: Request, res: Response, next: NextFunction) => 
     });
   });
 
-viewsRouter.get('/home', (req: Request, res: Response, next: NextFunction) => {
+viewsRouter.get('/home', expectLogin, (req: Request, res: Response, next: NextFunction) => {
   res.render('home_page');
 });
 
