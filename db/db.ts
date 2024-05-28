@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
     type: 'sqlite',
     database: 'dev.sqlite',
     entities: [User, Organization, Program, Demography, Permission, Role, Session],
-    logging: ['query', 'error'],
+    logging: ['error'],
     logger: 'advanced-console',
     synchronize: true,
     dropSchema: false
