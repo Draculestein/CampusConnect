@@ -8,14 +8,15 @@ const apiRouter = Router();
 apiRouter.post('/login', passport.authenticate('local-signin'),
     (req, res, next) => {
         if(!req.user) return res.status(401).json({ message: 'Unauthenticated!' });
-        const redirect = req.session.redirect || '/';
-
+        const redirect = req.cookies.redirect || '/';
+        logger.debug('Redirect:' + redirect);
         // return res.status(200).json({ message: 'User authenticated' });
+        res.clearCookie('redirect');
         return res.redirect(redirect);
     }
 );
 
-apiRouter.post('/signup', passport.authenticate('local-signin'), (req, res, next) => {
+apiRouter.post('/signup', (req, res, next) => {
     if(!req.user) return signUpWithEmailAndPassword(req, res);
 
     return res.status(200);
