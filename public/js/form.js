@@ -1,24 +1,28 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Retrieve the selected page index from localStorage
+  // Load data for each form
+  loadFormData('formPersonalInfo');
+  loadFormData('formAccomplishmentsOne');
+  loadFormData('formAccomplishmentsTwo');
+  loadFormData('formFinalization');
+  
+  // Existing code for setting the selected page index
   const selectedPageIndex = localStorage.getItem('selectedPageIndex');
-  // Check if there's a stored index, and set the corresponding page as active
   if (selectedPageIndex !== null) {
     const pages = document.querySelectorAll('.page');
     const pageLinks = document.querySelectorAll('.page-link');
     pages.forEach((page, index) => {
       if (index === parseInt(selectedPageIndex)) {
         page.classList.add('active');
-        // Add 'active' class to the corresponding page link
         pageLinks[index].classList.add('active');
       } else {
         page.classList.remove('active');
-        // Remove 'active' class from other page links
         pageLinks[index].classList.remove('active');
       }
     });
   }
   setTimeout(hidePreloader, 800);
 });
+
 
 function hidePreloader() {
   const preloader = document.querySelector(".preloader");
@@ -52,6 +56,7 @@ function goToSlide(index) {
   navItems[slideIndex].classList.remove('active');
   navItems[index].classList.add('active');
   slideIndex = index;
+  localStorage.setItem('selectedPageIndex', slideIndex);
 }
 
 function getFormIdBySlideIndex(index) {
@@ -109,12 +114,13 @@ function validateForm(formId) {
   for (const input of inputs) {
     if (input.hasAttribute('required') && !input.value) {
       alert('please fill in all required fields.');
-      console.log("shoow alert");
       return false;
     }
   }
+  saveFormData(formId);
   return true;
 }
+
 
 function validateAccomplishmentsOne() {
   if (validateForm('formAccomplishmentsOne')) {
@@ -732,6 +738,7 @@ regions.forEach(region => {
 }
 }
 
+
 document.getElementById('countryRegion').addEventListener('input', function() {
   validateCountryInput(); // Keep your existing validation
   updateProvinces(this.value); // Update the provinces based on the selected country
@@ -818,40 +825,26 @@ document.getElementById('okButton').addEventListener('click', function() {
   window.location.href = 'homepage.html';
 });
 
-function saveToLocalStorage() {
-  // Generate a unique UserID
-  const userId = 'user_' + new Date().getTime();
-
-  // Collect data from each form
-  const personalInfo = getFormData('formPersonalInfo');
-  const accomplishmentsOne = getFormData('formAccomplishmentsOne');
-  const accomplishmentsTwo = getFormData('formAccomplishmentsTwo');
-  const finalization = getFormData('formFinalization');
-
-  // Combine all data into a single object
-  const userData = {
-    personalInfo,
-    accomplishmentsOne,
-    accomplishmentsTwo,
-    finalization,
-  };
-
-  // Save data to localStorage with the UserID as the key
-  localStorage.setItem(userId, JSON.stringify(userData));
-
-  console.log('Data saved to localStorage with UserID:', userId);
+function saveFormData(formId) {
+  const form = document.getElementById(formId);
+  const formData = new FormData(form);
+  const formObject = {};
+  formData.forEach((value, key) => {
+    formObject[key] = value;
+  });
+  localStorage.setItem(formId, JSON.stringify(formObject));
 }
 
-function getFormData(formId) {
-  const form = document.getElementById(formId);
-  const inputs = form.querySelectorAll('input, select, textarea');
-  const formData = {};
-  inputs.forEach(input => {
-    if (input.type === 'checkbox' || input.type === 'radio') {
-      formData[input.name] = input.checked;
-    } else {
-      formData[input.name] = input.value;
-    }
-  });
-  return formData;
+function loadFormData(formId) {
+  const savedData = localStorage.getItem(formId);
+  if (savedData) {
+    const formObject = JSON.parse(savedData);
+    const form = document.getElementById(formId);
+    Object.keys(formObject).forEach(key => {
+      const input = form.querySelector(`[name=${key}]`);
+      if (input) {
+        input.value = formObject[key];
+      }
+    });
+  }
 }
