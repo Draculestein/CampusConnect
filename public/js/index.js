@@ -1,17 +1,17 @@
-// Function to check if the user is signed in
-function checkSignInStatus() {
-  const isSignedIn = localStorage.getItem('signedIn');
-  const profilePicture = document.getElementById('profile-picture');
-  const signInButton = document.getElementById('signin-button');
+// // Function to check if the user is signed in
+// function checkSignInStatus() {
+//   const isSignedIn = localStorage.getItem('signedIn');
+//   const profilePicture = document.getElementById('profile-picture');
+//   const signInButton = document.getElementById('signin-button');
 
-  if (isSignedIn === 'true') {
-    profilePicture.style.display = 'block';
-    signInButton.style.display = 'none';
-  } else {
-    profilePicture.style.display = 'none';
-    signInButton.style.display = 'block';
-  }
-}
+//   if (isSignedIn === 'true') {
+//     profilePicture.style.display = 'block';
+//     signInButton.style.display = 'none';
+//   } else {
+//     profilePicture.style.display = 'none';
+//     signInButton.style.display = 'block';
+//   }
+// }
 
 // Run the sign-in status check on page load
 window.onload = checkSignInStatus;

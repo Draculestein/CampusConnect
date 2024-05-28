@@ -15,7 +15,8 @@ const viewsRouter = Router();
 // Home page
 viewsRouter.get("/", (req: Request, res: Response) => {
     // render the index template
-    res.render("index");
+
+    res.render("index", { loggedIn: req.user ? true : false });
 });
 
 // Signup page

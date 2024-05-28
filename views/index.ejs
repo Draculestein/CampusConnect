@@ -33,8 +33,11 @@
             </li>
           </div>
           <li>
+            <% if(loggedIn) { %>
             <img id="profile-picture" class="profile-picture" src="path/to/profile-picture.jpg" alt="Profile Picture">
-            <button id="signin-button" onclick="location.href='log_in.html'">Log in</button>
+            <% } else { %>
+            <button id="signin-button" onclick="location.href='/login'">Log in</button>
+            <% } %>
           </li>
         </ul>
       </div>
