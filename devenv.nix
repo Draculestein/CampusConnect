@@ -7,6 +7,7 @@
   # https://devenv.sh/packages/
   packages = with pkgs; [ 
     git
+    sqlite
   ];
 
   # https://devenv.sh/scripts/
