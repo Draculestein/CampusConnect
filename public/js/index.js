@@ -1,27 +1,22 @@
-// // Function to check if the user is signed in
-// function checkSignInStatus() {
-//   const isSignedIn = localStorage.getItem('signedIn');
-//   const profilePicture = document.getElementById('profile-picture');
-//   const signInButton = document.getElementById('signin-button');
-
-//   if (isSignedIn === 'true') {
-//     profilePicture.style.display = 'block';
-//     signInButton.style.display = 'none';
-//   } else {
-//     profilePicture.style.display = 'none';
-//     signInButton.style.display = 'block';
-//   }
-// }
-
-// Run the sign-in status check on page load
-window.onload = checkSignInStatus;
-
 function search(event) {
   if (event.key === "Enter") {
     const query = document.getElementById("search-input").value;
     // Redirect to the search results page
-    window.location.href = "search-results.html?q=" + encodeURIComponent(query);
+    window.location.href = "/search?q=" + encodeURIComponent(query);
   }
+}
+
+function searchByFilters() {
+  const program = document.getElementById("programs").value;
+  const cities = document.getElementById("cities").value;
+  const climate = document.getElementById("climate").value;
+  const proprietorship = document.getElementById("proprietorship").value;
+  
+  const countrySelect = document.getElementById("countryChoices");
+  const country = countrySelect.options[countrySelect.selectedIndex].text;
+
+
+  
 }
 
 // Clear search input when clicking outside the search bar
