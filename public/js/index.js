@@ -20,7 +20,8 @@ function searchByFilters() {
     cityType,
     climate,
     isPublic,
-    country
+    country,
+    page: 1
   };
   
   const query = new URLSearchParams(queryParams);
