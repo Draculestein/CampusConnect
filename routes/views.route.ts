@@ -40,7 +40,7 @@ viewsRouter.get("/form", expectLogin, (req: Request, res: Response) => {
 });
 
 // University search result page
-viewsRouter.get('/result', (req: Request, res: Response, next: NextFunction) => {
+viewsRouter.get('/search', (req: Request, res: Response, next: NextFunction) => {
     res.render('result_page', {
       content: [
         {
