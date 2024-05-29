@@ -2,21 +2,30 @@ function search(event) {
   if (event.key === "Enter") {
     const query = document.getElementById("search-input").value;
     // Redirect to the search results page
-    window.location.href = "/search?q=" + encodeURIComponent(query);
+    window.location.href = "/search?name=" + encodeURIComponent(query);
   }
 }
 
 function searchByFilters() {
   const program = document.getElementById("programs").value;
-  const cities = document.getElementById("cities").value;
+  const cityType = document.getElementById("cities").value;
   const climate = document.getElementById("climate").value;
-  const proprietorship = document.getElementById("proprietorship").value;
+  const isPublic = document.getElementById("proprietorship").value == "public" ? true : false;
   
   const countrySelect = document.getElementById("countryChoices");
   const country = countrySelect.options[countrySelect.selectedIndex].text;
 
-
+  const queryParams = {
+    program,
+    cityType,
+    climate,
+    isPublic,
+    country
+  };
   
+  const query = new URLSearchParams(queryParams);
+  
+  location.href = "/search?" + query.toString();
 }
 
 // Clear search input when clicking outside the search bar
