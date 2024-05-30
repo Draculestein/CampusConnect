@@ -1,106 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <title>Campus Connect</title>
 
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-     <meta name="description" content="">
-     <meta name="keywords" content="">
-     <meta name="team" content="">
-     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="team" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-     <!-- MAIN CSS -->
-     <link rel="stylesheet" href="css/result-page.css">
+  <!-- MAIN CSS -->
+  <link rel="stylesheet" href="css/result-page.css">
 
 </head>
+
 <body>
 
-<section class="preloader">  
-  <div class="spinner">
+  <section class="preloader">
+    <div class="spinner">
 
-       <span class="spinner-rotate"></span>
-       
-  </div>
-</section>
+      <span class="spinner-rotate"></span>
+
+    </div>
+  </section>
 
   <div id="container">
 
     <div class="navbar-x" id="navbarx">
-        <span class="close-button" onclick="closeNavbar()">&times;</span>
-        <ul>
-            <li><p>Selection</p></li>
-            <li>
-              <select name="programName" id="programs">
-                        <option value="" disabled selected>Programs</option>
-                        <option value="0">2+2 years</option>
-                        <option value="1">4 years</option>
-                      </select>
-                    </li>
-                    <li>
-                      <select id="living">
-                        <option value="" disabled selected>Type of Living</option>
-                        <option value="steak">Steak</option>
-                        <option value="pasta">Pasta</option>
-                        <option value="salad">Salad</option>
-                      </select>
-                    </li>
-                    <li>
-                      <select id="weather">
-                        <option value="" disabled selected>Weather</option>
-                        <option value="steak">Steak</option>
-                        <option value="pasta">Pasta</option>
-                        <option value="salad">Salad</option>
-                      </select>
-                    </li>
-                    <li>
-                      <select id="how many aliens">
-                        <option value="" disabled selected>How Many Aliens</option>
-                        <option value="steak">Steak</option>
-                        <option value="pasta">Pasta</option>
-                        <option value="salad">Salad</option>
-                      </select>
-                    </li>
-                    <li>
-                      <select id="tuition fee">
-                        <option value="" disabled selected>Tuition Fee</option>
-                        <option value="steak">Steak</option>
-                        <option value="pasta">Pasta</option>
-                        <option value="salad">Salad</option>
-                      </select>
-                    </li>
-                    <li>
-                      <select id="countryChoices">
-                        <option value="" disabled selected>Choose a Country</option>
-                        <option value="0">United States</option>
-                        <option value="1">Canada</option>
-                        <option value="2">Australia</option>
-                        <option value="3">United Kingdom</option>
-                      </select>
-            </li>
-            <input type="submit" value="Search" onclick="console.log('1as')"><!-- Rename the '1as' -->
-        </ul>
+      <span class="close-button" onclick="closeNavbar()">&times;</span>
+      <ul>
+        <li>
+          <p>Selection</p>
+        </li>
+        <li>
+          <select name="programName" id="programs">
+              <option value="" disabled selected>Programs</option>
+              <option value="two">2 years</option>
+              <option value="four">4 years</option>
+            </select>
+          </li>
+          <li>
+            <select id="cities">
+              <option value="" disabled selected>Type of Cities</option>
+              <option value="metropolitan">Metropolitan</option>
+              <option value="mixed">Mixed</option>
+              <option value="suburb">Suburb</option>
+            </select>
+          </li>
+          <li>
+            <select id="climate">
+              <option value="" disabled selected>Climate</option>
+              <option value="warm">Warm Climate</option>
+              <option value="cold">Cold Climate</option>
+            </select>
+          </li>
+          <li>
+            <select id="proprietorship">
+              <option value="" disabled selected>Public / Private</option>
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+          </li>
+          <li>
+            <select id="countryChoices">
+              <option value="" disabled selected>Choose a Country</option>
+              <option>United States</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>United Kingdom</option>
+              <option>New Zealand</option>
+            </select>
+          </li>
+        <input type="submit" value="Search" onclick="console.log('1as')"><!-- Rename the '1as' -->
+      </ul>
     </div>
 
 
 
     <div id="navBar">
-      
-      <div class="upper">  
+
+      <div class="upper">
         <div class="home"></div>
       </div>
-      
+
       <div class="middler">
         <div class="middle">
 
-        <button class="toggle-button hover" onclick="toggleNavbar()">☰</button>
+          <button class="toggle-button hover" onclick="toggleNavbar()">☰</button>
 
-        <div class="page-link" data-target="one">1</div>
-        <div class="page-link" data-target="two">2</div>
-        <div class="page-link" data-target="three">3</div>
-        <div class="page-link" data-target="four">4</div>
-        <div class="page-link" data-target="five">5</div>
+          <div class="page-link" data-target="one">1</div>
+          <div class="page-link" data-target="two">2</div>
+          <div class="page-link" data-target="three">3</div>
+          <div class="page-link" data-target="four">4</div>
+          <div class="page-link" data-target="five">5</div>
 
 
         </div>
@@ -111,7 +106,7 @@
           <div class="dropdown-menu">
             <a href="profile.html" id="profileLink">Profile</a>
             <a href="setting.html" id="settingLink">setting</a>
-            <a href="" onclick="" id="logOutLink">log out</a> <!-- Add function to log out -->
+            <a href="/logout" id="logOutLink">log out</a> <!-- Add function to log out -->
             <a href="/login">Log in</a>
           </div>
         </div>
@@ -119,57 +114,54 @@
 
     </div>
 
-      <div id="container-result">
+    <div id="container-result">
       <div class="page active" id="one">
-        
 
-
-
-        <div  class="slides">
+        <div class="slides">
 
           <div class="con-slide">
             <a href="">
-            <div id="slide1" class="slide"></div>
+              <div id="slide1" class="slide"></div>
               <div class="img-content">
-                <img id ="img1" class="img-center">
+                <img id="img1" class="img-center">
               </div>
-              </a>
+            </a>
           </div>
 
           <div class="con-slide">
             <a href="/uni">
-            <div id="slide2" class="slide"></div>
+              <div id="slide2" class="slide"></div>
               <div class="img-content">
-                <img id ="img2" class="img-center">
+                <img id="img2" class="img-center">
               </div>
             </a>
           </div>
 
           <div class="con-slide">
             <a href="">
-            <div id="slide3" class="slide"></div>
+              <div id="slide3" class="slide"></div>
               <div class="img-content">
-                <img id ="img3" class="img-center">
+                <img id="img3" class="img-center">
               </div>
-              </a>
+            </a>
           </div>
 
           <div class="con-slide">
             <a href="">
-            <div id="slide4" class="slide"></div>
+              <div id="slide4" class="slide"></div>
               <div class="img-content">
-                <img id ="img4" class="img-center">
+                <img id="img4" class="img-center">
               </div>
-              </a>
+            </a>
           </div>
 
           <div class="con-slide">
             <a href="">
-            <div id="slide5" class="slide"></div>
+              <div id="slide5" class="slide"></div>
               <div class="img-content">
-                <img id ="img5" class="img-center">
+                <img id="img5" class="img-center">
               </div>
-              </a>
+            </a>
           </div>
 
         </div>
@@ -183,7 +175,7 @@
 
 
       <div id="two" class="page">
-        <div  class="slides">
+        <div class="slides">
           <div id="slide6" class="slide">Slide 6</div>
           <div id="slide7" class="slide">Slide 7</div>
           <div id="slide8" class="slide">Slide 8</div>
@@ -192,7 +184,7 @@
         </div>
       </div>
       <div id="three" class="page">
-        <div  class="slides">
+        <div class="slides">
           <div id="slide11" class="slide">Slide 11</div>
           <div id="slide12" class="slide">Slide 12</div>
           <div id="slide13" class="slide">Slide 13</div>
@@ -201,7 +193,7 @@
         </div>
       </div>
       <div id="four" class="page">
-        <div  class="slides">
+        <div class="slides">
           <div id="slide16" class="slide">Slide 16</div>
           <div id="slide17" class="slide">Slide 17</div>
           <div id="slide18" class="slide">Slide 18</div>
@@ -221,13 +213,10 @@
     </div>
   </div>
 
-  
+
 
 
   <script src="js/result-page.js"></script>
 </body>
+
 </html>
-
-
-
-
