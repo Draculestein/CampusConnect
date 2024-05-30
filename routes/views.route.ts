@@ -1,6 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { expectLogin } from '../middleware/auth.middleware';
-import { searchByName } from '../controllers/search.controllers';
 import session from 'express-session';
 import logger from "../config/logger";
 
@@ -42,43 +41,8 @@ viewsRouter.get("/form", expectLogin, (req: Request, res: Response) => {
 
 // University search result page
 viewsRouter.get('/search', async (req: Request, res: Response, next: NextFunction) => {
-  let result;
 
-  if ('name' in req.query) {
-    const { name, page } = req.query;
-    result = await searchByName(String(name), Number(page));
-    logger.info(result);
-  }
-  else {
-    const { programs, cityType, climate, isPublic, country, page } = req.query;
-  };
-
-  //
-
-  res.render('result_page', {
-    content: [
-      {
-        image: '/images/UofU.png',
-        background: '/images/harvardbuilding.png'
-      },
-      {
-        image: '/images/UofU.png',
-        background: '/images/uofubuilding.jpeg'
-      },
-      {
-        image: '/images/MIT.png',
-        background: '/images/mitbuilding.jpeg'
-      },
-      {
-        image: '/images/Stanford.png',
-        background: '/images/stanfordbuilding.jpeg'
-      },
-      {
-        image: '/images/UofW.png',
-        background: '/images/uofwbuilding.jpeg'
-      },
-    ]
-  });
+  res.render('result_page');
 });
 
 viewsRouter.get('/home', expectLogin, (req: Request, res: Response, next: NextFunction) => {
