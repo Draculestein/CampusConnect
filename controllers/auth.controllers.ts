@@ -27,8 +27,6 @@ export async function signUpWithEmailAndPassword(req: Request, res: Response) {
         }
 
         const newUser = new User();
-        newUser.firstName = firstName;
-        newUser.lastName = lastName;
         newUser.email = email;
         newUser.password = await argon2.hash(password);
 
