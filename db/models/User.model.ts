@@ -23,47 +23,11 @@ export class User {
     @Column()
     password: string;
 
-    @Column()
-    firstName: string;
-
-    @Column()
-    lastName: string;
-
-    @Column({
-        type: 'int',
-        nullable: true
-    })
-    age: number | null;
-
-    @Column({
-        type: 'text',
-        nullable: true
-    })
-    gender: string | null;
-
-    @Column({
-        type: 'date',
-        nullable: true
-    })
-    dob: Date | null;
-
     @Column({
         type: 'date',
         nullable: true
     })
     graduationDate: Date | null;
-
-    @Column({
-        type: 'text',
-        nullable: true
-    })
-    nationality: string;
-
-    @Column({
-        type: 'text',
-        nullable: true
-    })
-    race: string;
 
     @ManyToOne(() => Organization, (org) => org.users)
     organization: Organization | null;
