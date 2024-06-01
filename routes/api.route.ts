@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { signUpWithEmailAndPassword } from '../controllers/auth.controllers';
+import { searchByFilters, searchByName } from '../controllers/search.controllers';
 import passport from "passport";
 import logger from "../config/logger";
 
@@ -26,4 +27,9 @@ apiRouter.post('/logout', (req, res, next) => {
     req.logout((err) => logger.error(err));
 });
 
+apiRouter.get('/search-filters', async (req, res, next) => {
+    const [resultArray, resultCount, error] = await searchByFilters(1);
+})
+
+// apiRouter.get('/search-name')
 export default apiRouter;
