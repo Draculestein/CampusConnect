@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Load data for each form
   loadFormData('formPersonalInfo');
   loadFormData('formAccomplishmentsOne');
   loadFormData('formAccomplishmentsTwo');
   loadFormData('formFinalization');
   
-  // Existing code for setting the selected page index
   const selectedPageIndex = localStorage.getItem('selectedPageIndex');
   if (selectedPageIndex !== null) {
     const pages = document.querySelectorAll('.page');
@@ -23,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
   setTimeout(hidePreloader, 800);
 });
 
-
 function hidePreloader() {
   const preloader = document.querySelector(".preloader");
   preloader.classList.add("hidden");
@@ -31,27 +28,22 @@ function hidePreloader() {
 }
 
 function showPageContent() {
-  // Display the main content smoothly by setting opacity and visibility.
   const content = document.getElementById("container");
   content.style.visibility = "visible";
   content.style.opacity = "1";
 }
 
-// Needs a list to keep track of all selected options
 let slideIndex = 0;
 const slideContainer = document.querySelector('.slide-container');
 const navItems = document.querySelectorAll('.nav-item');
 
 function goToSlide(index) {
-  // Check if the user is moving forward and validate the form
   if (index > slideIndex && !validateForm(getFormIdBySlideIndex(slideIndex))) {
-    return; // Prevent moving forward if validation fails
+    return;
   }
-  // Check if the user is trying to go to the "Finalization" tab without completing "formAccomplishmentsTwo"
   if (index === 2 && !validateForm('formAccomplishmentsTwo')) {
     return;
   }
-  // Proceed with the slide change
   slideContainer.style.transform = `translateX(-${index * 20}%)`;
   navItems[slideIndex].classList.remove('active');
   navItems[index].classList.add('active');
@@ -70,7 +62,7 @@ function getFormIdBySlideIndex(index) {
     case 3:
       return 'formFinalization';
     default:
-      return ''; // No form associated with the index
+      return '';
   }
 }
 
@@ -98,9 +90,9 @@ const accomplishmentsSlides = document.querySelectorAll('.accomplishments-slide-
 
 function goToAccomplishmentsSlide(index) {
   accomplishmentsSlides.forEach(slide => {
-    slide.style.display = 'none'; // Hide all slides
+    slide.style.display = 'none';
   });
-  accomplishmentsSlides[index].style.display = 'block'; // Show the selected slide
+  accomplishmentsSlides[index].style.display = 'block';
   accomplishmentsSlideIndex = index;
 }
 
@@ -113,14 +105,13 @@ function validateForm(formId) {
   const inputs = form.querySelectorAll('input, select, textarea');
   for (const input of inputs) {
     if (input.hasAttribute('required') && !input.value) {
-      alert('please fill in all required fields.');
+      alert('Please fill in all required fields.');
       return false;
     }
   }
   saveFormData(formId);
   return true;
 }
-
 
 function validateAccomplishmentsOne() {
   if (validateForm('formAccomplishmentsOne')) {
@@ -145,7 +136,7 @@ document.getElementById('phoneCountryCode').addEventListener('change', function(
   if (this.value === '+62') {
     phoneNumberInput.placeholder = '813-1993-2377';
   } else {
-    phoneNumberInput.placeholder = '123-456-7890'; // Default placeholder for other country codes
+    phoneNumberInput.placeholder = '123-456-7890';
   }
 });
 
@@ -161,7 +152,7 @@ function validateCountryInput() {
     }
   }
   if (!inputMatch || /\d/.test(input.value)) {
-    input.value = input.value.slice(0, -1); // Remove the last character
+    input.value = input.value.slice(0, -1);
   }
 }
 
@@ -172,7 +163,7 @@ function validateEmail() {
   var isValidDomain = allowedDomains.some(domain => email.endsWith(domain));
   if (!isValidDomain) {
     alert("Please enter an email address with a valid domain (gmail.com, icloud.com, outlook.com, yahoo.com).");
-    emailInput.value = ''; // Clear the input
+    emailInput.value = '';
     return false;
   }
   return true;
@@ -185,7 +176,7 @@ function validateEmergencyEmail() {
   var isValidDomain = allowedDomains.some(domain => email.endsWith(domain));
   if (!isValidDomain) {
     alert("Please enter an emergency email address with a valid domain (gmail.com, icloud.com, outlook.com, yahoo.com).");
-    emailInput.value = ''; // Clear the input
+    emailInput.value = '';
     return false;
   }
   return true;
@@ -202,7 +193,7 @@ function validateAge() {
   }
   if (age < 15 || age > 50) {
     alert("Your age must be above 15 and below 50 to fill this form.");
-    birthdayInput.value = ''; // Clear the input
+    birthdayInput.value = '';
     return false;
   }
   return true;
@@ -218,18 +209,14 @@ function restrictYear() {
 }
 
 document.getElementById('phoneNumber').addEventListener('input', function(event) {
-  // Allow only digits and hyphens
   this.value = this.value.replace(/[^0-9\-]/g, '');
-  // Limit the length of the input to 20 characters
   if (this.value.length > 20) {
     this.value = this.value.slice(0, 20);
   }
 });
 
 document.getElementById('emergencyPhoneNumber').addEventListener('input', function(event) {
-  // Allow only digits and hyphens
   this.value = this.value.replace(/[^0-9\-]/g, '');
-  // Limit the length of the input to 20 characters
   if (this.value.length > 20) {
     this.value = this.value.slice(0, 20);
   }
@@ -763,7 +750,7 @@ function showSuccessMessage() {
     document.querySelector('.preloader').classList.add('hidden');
     showModal();
     document.getElementById('successModal').style.display = 'block';
-  }, 2000); // Simulate a delay for submission process
+  }, 2000);
 }
 
 document.getElementById('okButton').addEventListener('click', function() {
@@ -843,7 +830,11 @@ function loadFormData(formId) {
     Object.keys(formObject).forEach(key => {
       const input = form.querySelector(`[name=${key}]`);
       if (input) {
-        input.value = formObject[key];
+        if (input.type === "file") {
+          input.value = ""; // Clear the file input value
+        } else {
+          input.value = formObject[key];
+        }
       }
     });
   }

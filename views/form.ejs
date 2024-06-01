@@ -342,7 +342,7 @@
                         <p>TOEFL 7.0 | IELTS 6.5</p>
                         <span>
                           <p class="ep">Upload your file here: &#40;in <b style="color: black;">.pdf</b> format&#41;</p>
-                          <input type="file" id="schoolreport" name="schoolreport" accept=".pdf" required="">
+                          <input type="file" id="englishProficiency" name="englishproficiency" accept=".pdf" required="">
                         </span>
                         <br><br><br>
                         <div class="break">
@@ -388,7 +388,7 @@
                                     <span class="tooltiptext">.pdf only</span>
                                   </div>
                                 </div>
-                                <input type="file" id="schoolreport" name="schoolreport" accept=".pdf" required>
+                                <input type="file" id="schoolReport" name="schoolreport" accept=".pdf" required>
                               </div>
                             </div>
                           </div>
@@ -412,7 +412,7 @@
                         </div>
                         <div class="break">
                           <button onclick="goToAccomplishmentsSlide(0);return false;">Previous</button>
-                          <input type="submit" value="Next" onclick="validateAccomplishmentsTwo(); return false;"> <!-- Add submitFormAcc() -->
+                          <input type="submit" value="Next" onclick="validateAccomplishmentsTwo();savePDFToLocalStorage(); return false;"> <!-- Add submitFormAcc() -->
                         </div>
                       </div>
                     </form>
