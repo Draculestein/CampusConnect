@@ -1,11 +1,32 @@
-function search(event) {
+// Search function
+async function search(event) {
   if (event.key === "Enter") {
     const query = document.getElementById("search-input").value;
-    // Redirect to the search results page
-    window.location.href = "/search?name=" + encodeURIComponent(query);
+    try {
+      const response = await fetch('/api/universities', {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8'
+        },
+        body: {
+          name: query
+        }
+      });
+
+      if (response.ok) {
+        const results = await response.json();
+        // Handle the search results (for example, redirect to a results page or display them on the current page)
+        console.log(results);
+        // Redirect to the search results page
+        window.location.href = "search-results.html?q=" + encodeURIComponent(query);
+      } else {
+        console.error('Error fetching universities');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
 }
-
 function searchByFilters() {
   const program = document.getElementById("programs").value;
   const cityType = document.getElementById("cities").value;
@@ -28,11 +49,16 @@ function searchByFilters() {
   
   location.href = "/search?" + query.toString();
 }
-
 // Clear search input when clicking outside the search bar
 document.addEventListener('click', function(event) {
   const searchInput = document.getElementById('search-input');
-  if (event.target !== searchInput) {
+  if (event.target !== searchInput && !searchInput.contains(event.target)) {
     searchInput.value = '';
   }
+});
+
+// Clear search input when navigating away from the page
+window.addEventListener('beforeunload', function() {
+  const searchInput = document.getElementById('search-input');
+  searchInput.value = '';
 });
