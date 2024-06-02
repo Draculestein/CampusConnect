@@ -28,7 +28,40 @@ apiRouter.post('/logout', (req, res, next) => {
 });
 
 apiRouter.get('/search-filters', async (req, res, next) => {
-    const [resultArray, resultCount, error] = await searchByFilters(1);
+    let page = 1;
+    let numOfYears = null;
+    let cityType =  null;
+    let climate = null;
+    let isPublic = null;
+    let country = null;
+
+    // Input checking
+
+    if(req.query.page) {
+        page = Number(req.query.page);
+    }
+
+    if(req.query.programs && (req.query.programs == 'two' || req.query.programs == 'four')) {
+        numOfYears = req.query.programs;
+    }
+
+    if(req.query.cityType) {
+        cityType = String(req.query.cityType);
+    }
+
+    if(req.query.climate) {
+        climate = String(req.query.climate);
+    }
+
+    if(req.query.isPublic) {
+        isPublic = Boolean(isPublic);
+    }
+
+    if(req.query.country) {
+        country = String(req.query.country);
+    }
+
+    const [resultArray, resultCount, error] = await searchByFilters(page, numOfYears, cityType, climate, isPublic, country);
 })
 
 // apiRouter.get('/search-name')
