@@ -25,13 +25,14 @@ export async function searchByName(name: string) {
 
 export async function searchByFilters(
     page: number,
-    numOfYears?: string,
-    cityType?: string,
-    climate?: string,
-    isPublic?: boolean,
-    country?: string,
+    numOfYears: string | null,
+    cityType: string | null,
+    climate: string | null,
+    isPublic: boolean | null,
+    country: string | null,
 ) {
 
+    page = page < 1 ? 1 : page;
     try {
         let where = {};
         where = {
@@ -45,7 +46,7 @@ export async function searchByFilters(
 
         const result = await OrganizationSearchRepository.findAndCount({
             where,
-            skip: numberPerPage * page,
+            skip: numberPerPage * (page - 1),
             take: numberPerPage
         });
 
