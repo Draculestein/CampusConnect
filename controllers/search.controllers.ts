@@ -25,7 +25,7 @@ export async function searchByName(name: string) {
 
 export async function searchByFilters(
     page: number,
-    numOfYears: string | null,
+    numOfYears: number | null,
     cityType: string | null,
     climate: string | null,
     isPublic: boolean | null,
@@ -45,6 +45,11 @@ export async function searchByFilters(
         }
 
         const result = await OrganizationRepository.findAndCount({
+            select: {
+                url: true,
+                iconUrl: true,
+                backgroundSearchUrl: true
+            },
             where,
             skip: numberPerPage * (page - 1),
             take: numberPerPage

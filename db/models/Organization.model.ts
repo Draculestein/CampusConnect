@@ -26,6 +26,12 @@ export class Organization {
     @Column()
     url: string;
 
+    @Column()
+    iconUrl: string;
+
+    @Column()
+    backgroundSearchUrl: string;
+
     // Details
     @Column({
         type: String,
