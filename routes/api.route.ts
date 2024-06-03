@@ -42,7 +42,7 @@ apiRouter.get('/search-filters', async (req, res, next) => {
     }
 
     if(req.body.programs && (req.body.programs === 'two' || req.body.programs === 'four')) {
-        numOfYears = req.body.programs;
+        numOfYears = req.body.programs === 'two' ? 2 : 4;
     }
 
     if(req.body.cityType) {
