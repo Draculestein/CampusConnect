@@ -7,6 +7,23 @@ export class Organization {
     @PrimaryGeneratedColumn()
     id: number;
 
+    // Search properties
+    @Column()
+    numOfYears: number;
+
+    @Column()
+    cityType: string;
+
+    @Column()
+    climate: string;
+
+    @Column()
+    isPublic: boolean;
+
+    @Column()
+    country: string;
+
+    // Details
     @Column()
     ope8id: string;
 
@@ -75,6 +92,8 @@ export class Organization {
 
     @Column()
     usersTransferredOutCount: number;
+
+    // Relations
 
     @OneToMany(() => User, (user) => user.organization)
     users: User[];
