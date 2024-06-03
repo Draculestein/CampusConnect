@@ -27,73 +27,128 @@ export class Organization {
     url: string;
 
     // Details
-    @Column()
+    @Column({
+        type: String,
+        nullable: true
+    })
     ope8id: string;
 
-    @Column()
+    @Column({
+        type: String,
+        nullable: true
+    })
     ope6id: string;
 
-    @Column()
+    @Column({
+        type: String,
+        nullable: true
+    })
     name: string;
 
-    @Column()
+    @Column({
+        type: String,
+        nullable: true
+    })
     address: string;
 
-    @Column()
+    @Column({
+        type: String,
+        nullable: true
+    })
     city: string;
 
-    @Column()
+    @Column({
+        type: String,
+        nullable: true
+    })
     state: string;
 
-    @Column()
+    @Column({
+        type: String,
+        nullable: true
+    })
     postalCode: string;
 
-    @Column()
+    @Column({
+        type: String,
+        nullable: true
+    })
     website: string;
 
-    @Column({type: 'double'})
+    @Column({
+        type: 'double',
+        nullable: true
+    })
     admissionRate: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     averageSAT: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     testScore: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     nonResidentAlienCount: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     averageCostAttendance: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     outOfStateTuition: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     booksAndSuppliesCost: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     onCampusExpense: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     offCampusExpense: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     withFamilyExpense: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     ratioUndergradFaculty: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     lowestTemp: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     highestTemp: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     usersEnrolledCount: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     usersTransferredOutCount: number;
 
     // Relations
