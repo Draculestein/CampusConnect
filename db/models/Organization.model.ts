@@ -23,6 +23,9 @@ export class Organization {
     @Column()
     country: string;
 
+    @Column()
+    url: string;
+
     // Details
     @Column()
     ope8id: string;
@@ -46,7 +49,7 @@ export class Organization {
     postalCode: string;
 
     @Column()
-    url: string;
+    website: string;
 
     @Column({type: 'double'})
     admissionRate: number;

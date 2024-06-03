@@ -6,11 +6,11 @@ const numberPerPage = 5;
 
 export async function searchByName(name: string) {
     try {
-        const result = await OrganizationRepository
-            .createQueryBuilder('orgSearch')
-            .innerJoin('orgSearch.id', 'org')
-            .where('org.name = :name', { name })
-            .getMany();
+        const result = await OrganizationRepository.find({
+            where: {
+                name
+            }
+        })
 
         const resultTuple: [Organization[], any] = [result, null];
 
@@ -45,9 +45,6 @@ export async function searchByFilters(
         }
 
         const result = await OrganizationRepository.findAndCount({
-            select: {
-
-            },
             where,
             skip: numberPerPage * (page - 1),
             take: numberPerPage
