@@ -37,31 +37,39 @@ apiRouter.get('/search-filters', async (req, res, next) => {
 
     // Input checking
 
-    if(req.query.page) {
-        page = Number(req.query.page);
+    if(req.body.page) {
+        page = Number(req.body.page);
     }
 
-    if(req.query.programs && (req.query.programs == 'two' || req.query.programs == 'four')) {
-        numOfYears = req.query.programs;
+    if(req.body.programs && (req.body.programs === 'two' || req.body.programs === 'four')) {
+        numOfYears = req.body.programs;
     }
 
-    if(req.query.cityType) {
-        cityType = String(req.query.cityType);
+    if(req.body.cityType) {
+        cityType = String(req.body.cityType);
     }
 
-    if(req.query.climate) {
-        climate = String(req.query.climate);
+    if(req.body.climate) {
+        climate = String(req.body.climate);
     }
 
-    if(req.query.isPublic) {
+    if(req.body.isPublic) {
         isPublic = Boolean(isPublic);
     }
 
-    if(req.query.country) {
-        country = String(req.query.country);
+    if(req.body.country) {
+        country = String(req.body.country);
     }
 
     const [resultArray, resultCount, error] = await searchByFilters(page, numOfYears, cityType, climate, isPublic, country);
+
+    if(error)
+        return next(error);
+
+    return res.status(200).json({
+        count: resultCount,
+        result: resultArray
+    });
 })
 
 // apiRouter.get('/search-name')

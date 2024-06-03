@@ -1,18 +1,18 @@
-import { OrganizationSearch } from '../db/models/OrganizationSearch.model';
+import { Organization } from '../db/models/Organization.model';
 import logger from '../config/logger';
-import { OrganizationSearchRepository } from '../db/repositories/OrganizationSearch.repositories';
+import { OrganizationRepository } from '../db/repositories/Organization.repositories';
 
 const numberPerPage = 5;
 
 export async function searchByName(name: string) {
     try {
-        const result = await OrganizationSearchRepository
+        const result = await OrganizationRepository
             .createQueryBuilder('orgSearch')
             .innerJoin('orgSearch.id', 'org')
             .where('org.name = :name', { name })
             .getMany();
 
-        const resultTuple: [OrganizationSearch[], any] = [result, null];
+        const resultTuple: [Organization[], any] = [result, null];
 
         return resultTuple;
     } catch (error) {
@@ -44,13 +44,16 @@ export async function searchByFilters(
             ...(country && { country })
         }
 
-        const result = await OrganizationSearchRepository.findAndCount({
+        const result = await OrganizationRepository.findAndCount({
+            select: {
+
+            },
             where,
             skip: numberPerPage * (page - 1),
             take: numberPerPage
         });
 
-        const resultTuple: [OrganizationSearch[], number, any] = [result[0], result[1], null];
+        const resultTuple: [Organization[], number, any] = [result[0], result[1], null];
         return resultTuple;
     } catch (error) {
         logger.error('Search by filter error:\n' + error);
