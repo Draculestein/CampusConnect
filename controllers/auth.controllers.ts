@@ -12,7 +12,7 @@ interface UserResult {
 }
 
 export async function signUpWithEmailAndPassword(req: Request, res: Response) {
-    const { firstName, lastName, email, password } = req.body;
+    const { email, password } = req.body;
 
     try {
         const result = await UserRepository.findOne({
