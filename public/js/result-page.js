@@ -1,149 +1,188 @@
-document.querySelectorAll('.page-link').forEach((anchor, index) => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-
-    const targetId = this.getAttribute('data-target');
-    const targetElement = document.getElementById(targetId);
-    
-    // Remove 'active' class from all page links
-    document.querySelectorAll('.page-link').forEach(link => {
-      link.classList.remove('active');
+async function fetchUniversities() {
+    const response = await fetch('/api/search-filter', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body:{
+            program,
+            cityType,
+            climate,
+            isPublic,
+            country,
+            page,
+        }
     });
 
-    // Add 'active' class to the clicked page link
-    this.classList.add('active');
+    const data = await response.json();
+    const count = data.count; // assuming the response contains the count of slides
+    generatePages(count);
+}
 
-    // Store the selected page index in localStorage
-    localStorage.setItem('selectedPageIndex', index);
+function generatePages(count) {
+    const slidesPerPage = 5;
+    const pages = Math.ceil(count / slidesPerPage);
+    const containerResult = document.getElementById('container-result');
+    const pageLinksContainer = document.getElementById('pageLinksContainer');
 
-    window.scrollTo({
-      top: targetElement.offsetTop,
-      behavior: 'smooth'
+    for (let i = 0; i < pages; i++) {
+        const pageLink = document.createElement('div');
+        pageLink.className = 'page-link';
+        pageLink.dataset.target = `page${i + 1}`;
+        pageLink.textContent = i + 1;
+        pageLinksContainer.appendChild(pageLink);
+
+        const page = document.createElement('div');
+        page.className = 'page';
+        page.id = `page${i + 1}`;
+
+        const slides = document.createElement('div');
+        slides.className = 'slides';
+
+        page.appendChild(slides);
+        containerResult.appendChild(page);
+    }
+
+    if (pages > 0) {
+        document.querySelector('.page-link').classList.add('active');
+        document.querySelector('.page').classList.add('active');
+        fetchPageContent(1);
+    }
+}
+
+async function fetchPageContent(pageNumber) {
+    const response = await fetch('/api/search-filter', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body:{
+            program,
+            cityType,
+            climate,
+            isPublic,
+            country,
+            page: pageNumber,
+        }
     });
-  });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Retrieve the selected page index from localStorage
-  const selectedPageIndex = localStorage.getItem('selectedPageIndex');
-  
-  // Check if there's a stored index, and set the corresponding page as active
-  if (selectedPageIndex !== null) {
-    const pages = document.querySelectorAll('.page');
-    const pageLinks = document.querySelectorAll('.page-link');
-    pages.forEach((page, index) => {
-      if (index === parseInt(selectedPageIndex)) {
-        page.classList.add('active');
-        // Add 'active' class to the corresponding page link
-        pageLinks[index].classList.add('active');
-      } else {
-        page.classList.remove('active');
-        // Remove 'active' class from other page links
-        pageLinks[index].classList.remove('active');
-      }
+    const data = await response.json();
+    const slides = data.result;
+
+    const pageElement = document.getElementById(`page${pageNumber}`).querySelector('.slides');
+    pageElement.innerHTML = ''; // Clear any existing slides
+
+    slides.forEach((slide, index) => {
+        const slideDiv = document.createElement('div');
+        slideDiv.className = 'con-slide';
+
+        const link = document.createElement('a');
+        link.href = slide.link;
+
+        const slideContent = document.createElement('div');
+        slideContent.className = 'slide';
+        slideContent.style.backgroundImage = `url(${slide.backgroundImage})`;
+
+        const imgContent = document.createElement('div');
+        imgContent.className = 'img-content';
+
+        const imgCenter = document.createElement('img');
+        imgCenter.className = 'img-center';
+        imgCenter.src = slide.logo;
+
+        imgContent.appendChild(imgCenter);
+        slideDiv.appendChild(link);
+        link.appendChild(slideContent);
+        link.appendChild(imgContent);
+        pageElement.appendChild(slideDiv);
     });
-  }
+}
 
-  setTimeout(hidePreloader, 800);
+document.addEventListener('DOMContentLoaded', function() {
+    fetchUniversities();
+
+    document.querySelectorAll('.page-link').forEach((anchor, index) => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+            
+            document.querySelectorAll('.page-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            this.classList.add('active');
+
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            targetElement.classList.add('active');
+
+            fetchPageContent(index + 1);
+
+            window.scrollTo({
+                top: targetElement.offsetTop,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    setTimeout(hidePreloader, 800);
 });
 
 function hidePreloader() {
-  const preloader = document.querySelector(".preloader");
-  preloader.classList.add("hidden");
+    const preloader = document.querySelector(".preloader");
+    preloader.classList.add("hidden");
 
-  showPageContent();
+    showPageContent();
 }
 
-// JavaScript to hide/show the navigation bar
 function toggleNavbar() {
-  const navbar = document.getElementById('navbarx');
-  navbar.classList.toggle('open');
+    const navbar = document.getElementById('navbarx');
+    navbar.classList.toggle('open');
 }
 
 function closeNavbar() {
-  const navbar = document.getElementById('navbarx');
-  navbar.classList.remove('open');
+    const navbar = document.getElementById('navbarx');
+    navbar.classList.remove('open');
 }
 
 function showPageContent() {
-  // Display the main content smoothly by setting opacity and visibility.
-  const content = document.getElementById("container");
-  content.style.visibility = "visible";
-  content.style.opacity = "1";
+    const content = document.getElementById("container");
+    content.style.visibility = "visible";
+    content.style.opacity = "1";
 }
 
 function toggleDropdown() {
-  const dropdownMenu = document.querySelector('.dropdown-menu');
-  dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
 }
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function (event) {
-  if (!event.target.matches('.profile-picture')) {
-    const dropdownMenus = document.getElementsByClassName('dropdown-menu');
-    for (let i = 0; i < dropdownMenus.length; i++) {
-      let openDropdown = dropdownMenus[i];
-      if (openDropdown.style.display === 'block') {
-        openDropdown.style.display = 'none';
-      }
+window.onclick = function(event) {
+    if (!event.target.matches('.profile-picture')) {
+        const dropdownMenus = document.getElementsByClassName('dropdown-menu');
+        for (let i = 0; i < dropdownMenus.length; i++) {
+            let openDropdown = dropdownMenus[i];
+            if (openDropdown.style.display === 'block') {
+                openDropdown.style.display = 'none';
+            }
+        }
     }
-  }
 };
 
-function toggleProfileLink() {
-  // Simulate a login status check. Replace this with an actual login status check.
-  const isLoggedIn = checkLoginStatus(); // Implement this function
-
-  const profileLink = document.getElementById('profileLink');
-  const settingLink = document.getElementById('settingLink'); // Assuming setting link is unique
-  const logOutLink = document.getElementById('logOutLink'); // Modify this selector based on your log out link's unique identifier
-
-  if (isLoggedIn) {
-    profileLink.style.display = 'block'; // Show the Profile link if logged in
-    settingLink.style.display = 'block'; // Show the Setting link if logged in
-    logOutLink.style.display = 'block'; // Show the Log Out link if logged in
-  } else {
-    profileLink.style.display = 'none'; // Hide the Profile link if not logged in
-    settingLink.style.display = 'none'; // Hide the Setting link if not logged in
-    logOutLink.style.display = 'none'; // Hide the Log Out link if not logged in
-  }
-}
-
-// Implementation of checkLoginStatus()
-// This is a placeholder. It needs to implement the actual logic to determine if the user is logged in.
-function checkLoginStatus() {
-  // Check if 'isLoggedIn' key exists in localStorage and is true
-  return localStorage.getItem('isLoggedIn') === 'true';
-}
-
-// Call the function on page load and whenever the login status changes.
-document.addEventListener('DOMContentLoaded', toggleProfileLink);
-
-// Update the login status and localStorage.
-// Part of user login/logout process.
-function updateLoginStatus(isLoggedIn) {
-  localStorage.setItem('isLoggedIn', isLoggedIn); // Update localStorage
-  toggleProfileLink(); // Update the Home link visibility
-}
+document.querySelector('.home').addEventListener('click', function() {
+    goToHomePage();
+});
 
 function goToHomePage() {
-  // Check if the user is signed in
-  // Implement the actual check based on the authentication method
-  var isUserSignedIn = checkUserSignInStatus(); // Implement this function
-
-  if (isUserSignedIn) {
-    window.location.href = "home_page.html"; // Redirect to main2.html if the user is signed in
-  } else {
-    window.location.href = "index.html"; // Redirect to index.html if the user is not signed in
-  }
+    var isUserSignedIn = checkUserSignInStatus();
+    if (isUserSignedIn) {
+        window.location.href = "home_page.html";
+    } else {
+        window.location.href = "index.html";
+    }
 }
 
-// Implementation of checkUserSignInStatus (need to replace this with the actual logic)
 function checkUserSignInStatus() {
-  // Check for a specific cookie, local storage item, or session variable
-  // Using a cookie:
-  return document.cookie.includes("userSignedIn=true");
+    return document.cookie.includes("userSignedIn=true");
 }
-
-// Add an event listener to the home element
-document.querySelector('.home').addEventListener('click', goToHomePage);

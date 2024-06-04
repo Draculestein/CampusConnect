@@ -332,37 +332,3 @@ body {
   background-color: #f1f1f1;
   border-radius: 5px;
 }
-
-#slide1 {background-image: url('../images/harvardbuilding.png');}
-#slide2 {background-image: url('../images/uofubuilding.JPEG');}
-#slide3 {background-image: url('../images/mitbuilding.JPG');}
-#slide4 {background-image: url('../images/stanfordbuilding.JPG');}
-#slide5 {background-image: url('../images/uofwbuilding.JPG');}
-#slide6 { background-color: rgba(0, 0, 0, 0.5); }
-#slide7 { background-color: #ffbf69; }
-#slide8 { background-color: #ffffff; }
-#slide9 { background-color: #cbf3f0; }
-#slide10 { background-color: #2ec4b6; }
-#slide11 { background-color: rgba(0, 0, 0, 0.5); }
-#slide12 { background-color: #ffbf69; }
-#slide13 { background-color: #ffffff; }
-#slide14 { background-color: #cbf3f0; }
-#slide15 { background-color: #2ec4b6; }
-#slide16 { background-color: rgba(0, 0, 0, 0.5); }
-#slide17 { background-color: #ffbf69; }
-#slide18 { background-color: #ffffff; }
-#slide19 { background-color: #cbf3f0; }
-#slide20 { background-color: #2ec4b6; }
-#slide21 { background-color: rgba(0, 0, 0, 0.5); }
-#slide22 { background-color: #ffbf69; }
-#slide23 { background-color: #ffffff; }
-#slide24 { background-color: #cbf3f0; }
-#slide25 { background-color: #2ec4b6; }
-
-#img1 {content: url("../images/Harvard.png"); }
-#img2 {content: url("../images/UofU.png"); }
-#img3 {content: url("../images/MIT.png"); }
-#img4 {content: url("../images/Stanford.png"); }
-#img5 {content: url("../images/UofW.png"); }
-
-
