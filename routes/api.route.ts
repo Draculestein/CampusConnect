@@ -27,7 +27,7 @@ apiRouter.post('/logout', (req, res, next) => {
     req.logout((err) => logger.error(err));
 });
 
-apiRouter.get('/search-filters', async (req, res, next) => {
+apiRouter.post('/search-filter', async (req, res, next) => {
     let page = 1;
     let numOfYears = null;
     let cityType =  null;
@@ -41,8 +41,8 @@ apiRouter.get('/search-filters', async (req, res, next) => {
         page = Number(req.body.page);
     }
 
-    if(req.body.programs && (req.body.programs === 'two' || req.body.programs === 'four')) {
-        numOfYears = req.body.programs === 'two' ? 2 : 4;
+    if(req.body.program && (req.body.program === 'two' || req.body.program === 'four')) {
+        numOfYears = req.body.program === 'two' ? 2 : 4;
     }
 
     if(req.body.cityType) {
@@ -62,6 +62,8 @@ apiRouter.get('/search-filters', async (req, res, next) => {
     }
 
     const [resultArray, resultCount, error] = await searchByFilters(page, numOfYears, cityType, climate, isPublic, country);
+
+    logger.info(String(page) + ' ' + numOfYears+ ' ' + cityType+ ' ' + climate+ ' ' + isPublic+ ' ' + country);
 
     if(error)
         return next(error);
