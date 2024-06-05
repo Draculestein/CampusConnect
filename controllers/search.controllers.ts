@@ -63,3 +63,18 @@ export async function searchByFilters(
         return resultTuple;
     }
 }
+
+export async function findOrganizationByUrl(url: string) {
+    try {
+        const result = await OrganizationRepository.findOne({
+            where: {
+                url
+            }
+        });
+
+        return result;
+    } catch(error) {
+        logger.error(error);
+        return null;
+    }
+}
