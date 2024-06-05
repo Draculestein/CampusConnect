@@ -198,3 +198,26 @@ function goToHomePage() {
 function checkUserSignInStatus() {
   return document.cookie.includes("userSignedIn=true");
 }
+
+function searchByFilters() {
+  const program = document.getElementById("programs").value;
+  const cityType = document.getElementById("cities").value;
+  const climate = document.getElementById("climate").value;
+  const isPublic = document.getElementById("proprietorship").value == "public" ? true : false;
+  
+  const countrySelect = document.getElementById("countryChoices");
+  const country = countrySelect.options[countrySelect.selectedIndex].text;
+
+  const queryParams = {
+    program,
+    cityType,
+    climate,
+    isPublic,
+    country,
+    page: 1
+  };
+  
+  const query = new URLSearchParams(queryParams);
+  
+  location.href = "/search?" + query.toString();
+}
