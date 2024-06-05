@@ -4,7 +4,7 @@ async function search(event) {
     const query = document.getElementById("search-input").value;
     try {
       const response = await fetch('/api/universities', {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-type': 'application/json; charset=UTF-8'
         },
