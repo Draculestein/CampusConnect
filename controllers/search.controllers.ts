@@ -64,7 +64,7 @@ export async function searchByFilters(
     }
 }
 
-export async function findOrganizationByUrl(url: string) {
+export async function searchByUrl(url: string) {
     try {
         const result = await OrganizationRepository.findOne({
             where: {
