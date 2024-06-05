@@ -74,5 +74,16 @@ apiRouter.post('/search-filter', async (req, res, next) => {
     });
 })
 
-// apiRouter.get('/search-name')
+apiRouter.get('/search-name', async (req, res) => {
+    if(!req.body.name)
+        return res.sendStatus(404).json({ message: 'No name property!'});
+
+    const [resultArray, error] = await searchByName(req.body.name);
+
+    if(error) return res.status(404).json({ message: 'Error! ' + error});
+
+    return res.status(200).json({
+        resultArray
+    });
+});
 export default apiRouter;
