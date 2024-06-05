@@ -3,7 +3,7 @@ async function search(event) {
   if (event.key === "Enter") {
     const query = document.getElementById("search-input").value;
     try {
-      const response = await fetch('/api/universities}', {
+      const response = await fetch('/api/universities', {
         method: 'GET',
         headers: {
           'Content-type': 'application/json; charset=UTF-8'
