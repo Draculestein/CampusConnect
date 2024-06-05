@@ -8,7 +8,7 @@ export function runTestData() {
     uOfU.climate = 'cold';
     uOfU.isPublic = true;
     uOfU.country = 'United States';
-    uOfU.url = '/uofu';
+    uOfU.url = 'uofu';
     uOfU.iconUrl = '/images/UofU.png';
     uOfU.backgroundSearchUrl = '/images/uofubuilding.jpeg';
 
