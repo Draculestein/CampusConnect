@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from "express";
 import { expectLogin } from '../middleware/auth.middleware';
 import session from 'express-session';
 import logger from "../config/logger";
-import { searchByName } from "../controllers/search.controllers";
+import { searchByUrl } from "../controllers/search.controllers";
 
 declare module 'express-session' {
   export interface SessionData {
@@ -50,11 +50,12 @@ viewsRouter.get('/home', expectLogin, (req: Request, res: Response, next: NextFu
   res.render('home_page');
 });
 
-viewsRouter.get('/uni/:url', (req: Request, res: Response, next: NextFunction) => {
+viewsRouter.get('/uni/:url', async (req: Request, res: Response, next: NextFunction) => {
   const { url } = req.params;
 
-  const organization = searchByName(url);
+  const organization = await searchByUrl(url);
 
+  logger.info(organization);
   if(!organization) return res.render('error', {
     message: 'Organization not found!',
     error: {
