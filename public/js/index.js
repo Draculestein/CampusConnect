@@ -3,8 +3,8 @@ async function search(event) {
   if (event.key === "Enter") {
     const query = document.getElementById("search-input").value;
     try {
-      const response = await fetch('/api/universities', {
-        method: 'POST',
+      const response = await fetch('/api/universities}', {
+        method: 'GET',
         headers: {
           'Content-type': 'application/json; charset=UTF-8'
         },
@@ -12,13 +12,22 @@ async function search(event) {
           name: query
         }
       });
-
       if (response.ok) {
         const results = await response.json();
-        // Handle the search results (for example, redirect to a results page or display them on the current page)
-        console.log(results);
-        // Redirect to the search results page
-        window.location.href = "search-results.html?q=" + encodeURIComponent(query);
+        // Handle the search results (for example, display them in the search-results container)
+        const searchResultsContainer = document.getElementById('search-results');
+        searchResultsContainer.innerHTML = '';
+        results.forEach(result => {
+          const item = document.createElement('div');
+          item.className = 'search-result-item';
+          item.textContent = result.name; // Assuming the result has a 'name' property
+          item.onclick = () => {
+            // Handle the click event for the search result item (e.g., redirect to the university page)
+            window.location.href = `/university/${result.id}`; // Assuming the result has an 'id' property
+          };
+          searchResultsContainer.appendChild(item);
+        });
+        searchResultsContainer.style.display = 'block';
       } else {
         console.error('Error fetching universities');
       }

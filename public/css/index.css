@@ -8,10 +8,6 @@ body {
   background: #fbf8f6!important;
 }
 
-/*---------------------------------------
-    SEARCH BAR
------------------------------------------*/
-
 .search-container {
   width: 70%;
   margin-top: 8%;
@@ -73,6 +69,34 @@ input#search-input:focus ~ .label-sm {
   transform: translate(0, -50%);
 }
 
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #333;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.search-result-item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: #f0f0f0;
+}
+
 /*---------------------------------------
     HOME          
 -----------------------------------------*/
@@ -87,7 +111,7 @@ input#search-input:focus ~ .label-sm {
 }
 
 .logo {
-	margin: 10%;
+  margin: 10%;
   font-size: 40px;
 }
 
@@ -237,6 +261,7 @@ button#signin-button:hover {
   height: 50px;
   border-radius: 50%;
   margin-right: 20px;
+  display: none;
 }
 
 .header {
