@@ -11,6 +11,7 @@ export function runTestData() {
     uOfU.url = 'uofu';
     uOfU.iconUrl = '/images/UofU.png';
     uOfU.backgroundSearchUrl = '/images/uofubuilding.jpeg';
+    uOfU.name = 'Test Name 3';
 
     OrganizationRepository.save(uOfU);
 }
