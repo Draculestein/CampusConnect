@@ -221,54 +221,5 @@ function scrollFunction() {
 }
 
 document.getElementById('applyButton').addEventListener('click', function() {
-    // Check if the user is logged in
-    // This is just a placeholder condition; replace it with an actual login check
-    var isLoggedIn = false; // Change this to true to simulate a logged-in user
-
-    if (isLoggedIn) {
-        window.location.href = 'form.html';
-    } else {
-        window.location.href = 'sign_up.html';
-    }
+    window.location.href = '/form';
 });
-
-
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//   const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true'; // Example check
-//   const dropdownMenu = document.getElementById('dropdownMenu');
-
-//   // Clear existing menu items
-//   while (dropdownMenu.firstChild) {
-//     dropdownMenu.removeChild(dropdownMenu.firstChild);
-//   }
-
-//   // Populate dropdown based on login status
-//   if (isLoggedIn) {
-//     // If logged in, show profile and settings
-//     dropdownMenu.innerHTML = '<li><a href="profile.html">Profile</a></li><li><a href="settings.html">Settings</a></li>';
-//   } else {
-//     // If not logged in, show login option
-//     dropdownMenu.innerHTML = '<li><a href="log-in.html">Log In</a></li>';
-//   }
-
-//   // Toggle dropdown display on click
-//   document.getElementById('profilePic').addEventListener('click', function() {
-//     dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-//   });
-
-//   // Optional: Hide dropdown when clicking elsewhere
-//   window.onclick = function(event) {
-//     if (!event.target.matches('.profile-pic')) {
-//       var dropdowns = document.getElementsByClassName("dropdown-menu");
-//       for (var i = 0; i < dropdowns.length; i++) {
-//         var openDropdown = dropdowns[i];
-//         if (openDropdown.style.display === 'block') {
-//           openDropdown.style.display = 'none';
-//         }
-//       }
-//     }
-//   };
-// });
-
