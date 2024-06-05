@@ -725,7 +725,6 @@ regions.forEach(region => {
 }
 }
 
-
 document.getElementById('countryRegion').addEventListener('input', function() {
   validateCountryInput(); // Keep your existing validation
   updateProvinces(this.value); // Update the provinces based on the selected country
@@ -737,7 +736,7 @@ document.getElementById('doubleCheckButton').addEventListener('click', function(
 
 document.getElementById('submitButton').addEventListener('click', function() {
   showPreloader();
-  saveToLocalStorage();
+  submitToTheServer();
   showSuccessMessage();
 });
 
@@ -837,5 +836,49 @@ function loadFormData(formId) {
         }
       }
     });
+  }
+}
+
+function savePDFToLocalStorage() {
+  const pdfInput = document.getElementById('schoolReport');
+  const file = pdfInput.files[0];
+
+  if (file && file.type === 'application/pdf') {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const fileData = e.target.result;
+      localStorage.setItem('schoolReportPDF', fileData);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    alert('Please upload a valid PDF file.');
+  }
+}
+
+async function submitToTheServer() {
+  const formPersonalInfo = new FormData(document.getElementById('formPersonalInfo'));
+  const formAccomplishmentsOne = new FormData(document.getElementById('formAccomplishmentsOne'));
+  const formAccomplishmentsTwo = new FormData(document.getElementById('formAccomplishmentsTwo'));
+  const formFinalization = new FormData(document.getElementById('formFinalization'));
+
+  const formData = new FormData();
+  formPersonalInfo.forEach((value, key) => formData.append(key, value));
+  formAccomplishmentsOne.forEach((value, key) => formData.append(key, value));
+  formAccomplishmentsTwo.forEach((value, key) => formData.append(key, value));
+  formFinalization.forEach((value, key) => formData.append(key, value));
+
+  try {
+    const response = await fetch('/api/universities', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      document.getElementById('successModal').style.display = 'block';
+    } else {
+      console.error('Error submitting the form');
+    }
+  } catch (error) {
+    console.error('Error:', error);
   }
 }
