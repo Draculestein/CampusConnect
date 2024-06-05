@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from "express";
 import { expectLogin } from '../middleware/auth.middleware';
 import session from 'express-session';
 import logger from "../config/logger";
+import { searchByName } from "../controllers/search.controllers";
 
 declare module 'express-session' {
   export interface SessionData {
@@ -49,7 +50,19 @@ viewsRouter.get('/home', expectLogin, (req: Request, res: Response, next: NextFu
   res.render('home_page');
 });
 
-viewsRouter.get('/uni', (req: Request, res: Response, next: NextFunction) => {
-  res.render('university_of_utah');
+viewsRouter.get('/uni/:url', (req: Request, res: Response, next: NextFunction) => {
+  const { url } = req.params;
+
+  const organization = searchByName(url);
+
+  if(!organization) return res.render('error', {
+    message: 'Organization not found!',
+    error: {
+      status: '404',
+      stack: 'No stack'
+    }
+  })
+
+  res.render('university_landing', organization);
 });
 export default viewsRouter;
