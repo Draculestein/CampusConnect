@@ -23,7 +23,7 @@ async function search(event) {
           item.textContent = result.name; // Assuming the result has a 'name' property
           item.onclick = () => {
             // Handle the click event for the search result item (e.g., redirect to the university page)
-            window.location.href = `/university/${result.id}`; // Assuming the result has an 'id' property
+            window.location.href = '/uni/' + result.url;
           };
           searchResultsContainer.appendChild(item);
         });

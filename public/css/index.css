@@ -71,8 +71,6 @@ input#search-input:focus ~ .label-sm {
 
 .search-results {
   position: absolute;
-  top: 100%;
-  left: 0;
   width: 100%;
   background: white;
   border: 1px solid #333;
