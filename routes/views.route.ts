@@ -1,15 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { expectLogin } from '../middleware/auth.middleware';
-import session from 'express-session';
 import logger from "../config/logger";
 import { searchByUrl } from "../controllers/search.controllers";
-
-declare module 'express-session' {
-  export interface SessionData {
-    redirect: string;
-  }
-}
-
 
 const viewsRouter = Router();
 
@@ -36,13 +28,12 @@ viewsRouter.get('/logout', (req, res, next) => {
 });
 
 // Form page
-viewsRouter.get("/form", expectLogin, (req: Request, res: Response) => {
-  res.render("form");
+viewsRouter.get('/form', expectLogin, (req: Request, res: Response) => {
+  res.render('form');
 });
 
 // University search result page
 viewsRouter.get('/search', async (req: Request, res: Response, next: NextFunction) => {
-
   res.render('result_page');
 });
 
@@ -55,7 +46,6 @@ viewsRouter.get('/uni/:url', async (req: Request, res: Response, next: NextFunct
 
   const organization = await searchByUrl(url);
 
-  logger.info(organization);
   if(!organization) return res.render('error', {
     message: 'Organization not found!',
     error: {
