@@ -5,6 +5,7 @@
 - [Setup Guide](#setup-guide)
 - [Poject Structure](#project-structure)
 - [Libraries Used](#libraries-used)
+- [Additional Information](#additional-information)
 ## Project Architecture
 
 Frontend: HTML, CSS, Javascript, and React. 
@@ -84,3 +85,7 @@ The main files and directories are displayed below.
 - dotenv ([documentation](https://www.npmjs.com/package/dotenv)): environment variables management
 - jsonwebtoken ([documentation](https://www.npmjs.com/package/jsonwebtoken)): JWT functionality
 - winston ([documentation](https://www.npmjs.com/package/winston)): logger for Node.js
+
+## Additional Information
+
+To populate countries and states data, we used data from [dr5hn's countries, states, and cities database](https://github.com/dr5hn/countries-states-cities-database).
