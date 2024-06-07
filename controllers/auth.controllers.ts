@@ -12,6 +12,12 @@ interface UserResult {
 }
 
 export async function signUpWithEmailAndPassword(req: Request, res: Response) {
+    if (!req.body.email)
+        return res.status(400).json({ message: 'Missing email field!' });
+
+    if (!req.body.password)
+        return res.status(400).json({ message: 'Missing password field!' });
+
     const { email, password } = req.body;
 
     try {
@@ -22,8 +28,7 @@ export async function signUpWithEmailAndPassword(req: Request, res: Response) {
         });
 
         if (result != null) {
-            res.status(403).json({ message: 'Email is already associated with an account!' });
-            return;
+            return res.status(403).json({ message: 'Email is already associated with an account!' });
         }
 
         const newUser = new User();
@@ -42,7 +47,7 @@ export async function signUpWithEmailAndPassword(req: Request, res: Response) {
 
 passport.use('local-signin',
     new Strategy({ usernameField: 'email' }, async (email, password, done) => {
-        // logger.info('In local-signin');
+
         try {
             const result = await UserRepository.findOne({
                 where: {
@@ -70,12 +75,10 @@ passport.use('local-signin',
 );
 
 passport.serializeUser((user, done) => {
-    // logger.info('Serialize: \n' + JSON.stringify(user));
     done(null, user);
 });
 
 passport.deserializeUser(async (user: UserResult, done) => {
-    // logger.info('Deserialize: \n' + JSON.stringify(user));
     try {
         const result = await UserRepository.findOne({
             where: {
