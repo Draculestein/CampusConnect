@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Generated } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Generated, OneToMany } from 'typeorm';
 import { Organization } from './Organization.model';
 import { Role } from './Roles.model';
+import { Application } from './Application.model';
 
 @Entity()
 export class User {
@@ -34,4 +35,7 @@ export class User {
 
     @ManyToOne(() => Role, (role) => role.users)
     role: Role;
+
+    @OneToMany(() => Application, (application) => application.user)
+    applications: Application[];
 }

@@ -1,10 +1,18 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { User } from './User.model';
+import { Organization } from './Organization.model';
 
 @Entity()
 export class Application {
 
     @PrimaryGeneratedColumn()
     id: number;
+
+    @ManyToOne(() => User, (user) => user.applications)
+    user: User;
+
+    @ManyToOne(() => Organization, (org) => org.applications)
+    organization: Organization;
 
     @Column()
     firstName: string;
