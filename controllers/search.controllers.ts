@@ -4,7 +4,7 @@ import { OrganizationRepository } from '../db/repositories/Organization.reposito
 
 const numberPerPage = 5;
 
-export async function searchByName(name: string) {
+export async function searchByName(name: string): Promise<[Organization[] | null, any]> {
     try {
         const result = await OrganizationRepository.find({
             where: {
@@ -30,7 +30,7 @@ export async function searchByFilters(
     climate: string | null,
     isPublic: boolean | null,
     country: string | null,
-) {
+): Promise<[Organization[] | null, number, any]> {
 
     page = page < 1 ? 1 : page;
     try {
@@ -73,7 +73,7 @@ export async function searchByUrl(url: string) {
         });
 
         return result;
-    } catch(error) {
+    } catch (error) {
         logger.error(error);
         return null;
     }
