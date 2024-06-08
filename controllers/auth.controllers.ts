@@ -6,15 +6,7 @@ import { Strategy } from 'passport-local';
 import { UserRepository } from '../db/repositories/User.repositories';
 import logger from '../config/logger';
 
-export async function signUpWithEmailAndPassword(req: Request, res: Response) {
-    if (!req.body.email)
-        return res.status(400).json({ message: 'Missing email field!' });
-
-    if (!req.body.password)
-        return res.status(400).json({ message: 'Missing password field!' });
-
-    const { email, password } = req.body;
-
+export async function signUpWithEmailAndPassword(email: string, password: string): Promise<[boolean, any]> {
     try {
         const result = await UserRepository.findOne({
             where: {
@@ -23,7 +15,7 @@ export async function signUpWithEmailAndPassword(req: Request, res: Response) {
         });
 
         if (result != null) {
-            return res.status(403).json({ message: 'Email is already associated with an account!' });
+            return [false, { message: 'Email is already associated with an account!' }];
         }
 
         const newUser = new User();
@@ -32,10 +24,10 @@ export async function signUpWithEmailAndPassword(req: Request, res: Response) {
 
         await UserRepository.save(newUser);
 
-        res.status(200).json({ message: 'Successful sign up with email and password!' });
+        return [true, { message: 'Successful sign up with email and password!' }];
     } catch (error) {
         logger.error(error);
-        res.status(500).json({ message: 'Error signing up with email and password!' });
+        return [false, { message: 'Error signing up with email and password!' }];
     };
 
 }
@@ -70,14 +62,14 @@ passport.use('local-signin',
 );
 
 passport.serializeUser((user, done) => {
-    done(null, user);
+    done(null, user.id);
 });
 
-passport.deserializeUser(async (user: Express.User, done) => {
+passport.deserializeUser(async (id: number, done) => {
     try {
         const result = await UserRepository.findOne({
             where: {
-                id: user?.id
+                id
             }
         });
 

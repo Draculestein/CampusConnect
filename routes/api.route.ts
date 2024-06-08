@@ -17,10 +17,24 @@ apiRouter.post('/login', passport.authenticate('local-signin'),
     }
 );
 
-apiRouter.post('/signup', (req, res, next) => {
-    if (!req.user) return signUpWithEmailAndPassword(req, res);
+apiRouter.post('/signup', async (req, res, next) => {
+    if (req.user)
+        return res.status(200);
 
-    return res.status(200);
+    if (!req.body.email)
+        return res.status(400).json({ message: 'Missing email field!' });
+
+    if (!req.body.password)
+        return res.status(400).json({ message: 'Missing password field!' });
+
+    const { email, password } = req.body;
+
+    const [success, error] = await signUpWithEmailAndPassword(email, password);
+
+    if (success)
+        return res.status(200).json({ message: 'Successful signup with email and password!' });
+    else
+        return res.status(401).json(error);
 });
 
 apiRouter.post('/logout', (req, res, next) => {
@@ -94,5 +108,7 @@ apiRouter.post('/apply/:orgUrl', expectLogin, async (req, res) => {
     const { orgUrl } = req.params;
 
     logger.info(req.body);
+
+
 });
 export default apiRouter;
