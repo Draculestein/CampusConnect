@@ -836,7 +836,7 @@ function loadFormData(formId) {
 }
 
 function savePDFToLocalStorage() {
-  const englishProficiencyInput = document.getElementById('englishProficiency');
+  const englishProficiencyInput = document.getElementById('englishProficiencyInput');
   const schoolReportInput = document.getElementById('schoolReport');
   
   const englishProficiencyFile = englishProficiencyInput.files[0];
@@ -908,7 +908,7 @@ async function submitToTheServer() {
   formData.zipCode = formPersonalInfo.querySelector('#zipCode').value;
 
   // Add data from formAccomplishmentsOne
-  formData.englishProficiency = formAccomplishmentsOne.querySelector('#englishProficiency').files[0];
+  formData.englishProficiency = formAccomplishmentsOne.querySelector('#englishProficiencyInput').files[0];
 
   // Add data from formAccomplishmentsTwo
   formData.schoolName = formAccomplishmentsTwo.querySelector('#schoolName').value;
