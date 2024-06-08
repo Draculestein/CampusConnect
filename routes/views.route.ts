@@ -28,7 +28,7 @@ viewsRouter.get('/logout', (req, res, next) => {
 });
 
 // Form page
-viewsRouter.get('/form', expectLogin, (req: Request, res: Response) => {
+viewsRouter.get('/form/:orgUrl', expectLogin, (req: Request, res: Response) => {
   res.render('form');
 });
 
