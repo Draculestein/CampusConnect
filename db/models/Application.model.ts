@@ -16,6 +16,9 @@ export class Application {
     email: string;
 
     @Column()
+    phoneCountryCode: string;
+
+    @Column()
     phoneNumber: string;
 
     @Column()
@@ -43,6 +46,9 @@ export class Application {
     zip: string;
 
     @Column()
+    englishProficiencyReportPath: string;
+
+    @Column()
     schoolName: string;
 
     @Column()
@@ -53,6 +59,9 @@ export class Application {
 
     @Column()
     schoolCity: string;
+
+    @Column()
+    schoolReportPath: string;
 
     @Column()
     schoolProvince: string;
@@ -68,6 +77,9 @@ export class Application {
 
     @Column()
     emergencyEmail: string;
+
+    @Column()
+    emergencyCountryCode: string;
 
     @Column()
     emergencyPhoneNumber: string;
