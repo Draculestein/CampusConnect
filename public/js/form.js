@@ -788,7 +788,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById('okButton').addEventListener('click', function() {
   hideSuccessModal();
-  window.location.href = 'homepage.html';
+  window.location.href = '/home';
 });
 
 function saveFormData(formId) {
@@ -862,7 +862,7 @@ async function submitToTheServer() {
   formFinalization.forEach((value, key) => formData.append(key, value));
 
   try {
-    const response = await fetch('/api/universities', {
+    const response = await fetch('/api/apply/uofu', {
       method: 'POST',
       body: formData
     });
