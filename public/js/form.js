@@ -834,30 +834,53 @@ function loadFormData(formId) {
     }
   }
 }
+function enablePhoneNumberInput() {
+  var countryCode = document.getElementById("phoneCountryCode").value;
+  var phoneNumberInput = document.getElementById("phoneNumber");
+  if (countryCode) {
+    phoneNumberInput.disabled = false;
+  } else {
+    phoneNumberInput.disabled = true;
+  }
+}
+
+function enableEmergencyNumberInput() {
+  var countryCode = document.getElementById("emergencyPhoneCountryCode").value;
+  var phoneNumberInput = document.getElementById("emergencyPhoneNumber");
+  if (countryCode) {
+    phoneNumberInput.disabled = false;
+  } else {
+    phoneNumberInput.disabled = true;
+  }
+}
 
 function savePDFToLocalStorage() {
   const englishProficiencyInput = document.getElementById('englishProficiencyInput');
   const schoolReportInput = document.getElementById('schoolReport');
-  
-  const englishProficiencyFile = englishProficiencyInput.files[0];
-  const schoolReportFile = schoolReportInput.files[0];
 
+  const formAccomplishmentsOne = JSON.parse(localStorage.getItem('formAccomplishmentsOne')) || {};
+  const formAccomplishmentsTwo = JSON.parse(localStorage.getItem('formAccomplishmentsTwo')) || {};
+
+  // Save englishProficiency PDF in formAccomplishmentsOne
+  const englishProficiencyFile = englishProficiencyInput.files[0];
   if (englishProficiencyFile && englishProficiencyFile.type === 'application/pdf') {
     const reader = new FileReader();
-    reader.onload = function(e) {
-      const fileData = e.target.result;
-      localStorage.setItem('englishProficiencyPDF', fileData);
+    reader.onload = function (e) {
+      formAccomplishmentsOne.englishProficiencyPDF = e.target.result;
+      localStorage.setItem('formAccomplishmentsOne', JSON.stringify(formAccomplishmentsOne));
     };
     reader.readAsDataURL(englishProficiencyFile);
   } else if (englishProficiencyFile) {
     alert('Please upload a valid PDF file for English Proficiency.');
   }
 
+  // Save schoolReport PDF in formAccomplishmentsTwo
+  const schoolReportFile = schoolReportInput.files[0];
   if (schoolReportFile && schoolReportFile.type === 'application/pdf') {
     const reader = new FileReader();
-    reader.onload = function(e) {
-      const fileData = e.target.result;
-      localStorage.setItem('schoolReportPDF', fileData);
+    reader.onload = function (e) {
+      formAccomplishmentsTwo.schoolReportPDF = e.target.result;
+      localStorage.setItem('formAccomplishmentsTwo', JSON.stringify(formAccomplishmentsTwo));
     };
     reader.readAsDataURL(schoolReportFile);
   } else if (schoolReportFile) {
