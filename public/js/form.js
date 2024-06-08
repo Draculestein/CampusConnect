@@ -836,35 +836,107 @@ function loadFormData(formId) {
 }
 
 function savePDFToLocalStorage() {
-  const pdfInput = document.getElementById('schoolReport');
-  const file = pdfInput.files[0];
+  const englishProficiencyInput = document.getElementById('englishProficiency');
+  const schoolReportInput = document.getElementById('schoolReport');
+  
+  const englishProficiencyFile = englishProficiencyInput.files[0];
+  const schoolReportFile = schoolReportInput.files[0];
 
-  if (file && file.type === 'application/pdf') {
+  if (englishProficiencyFile && englishProficiencyFile.type === 'application/pdf') {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const fileData = e.target.result;
+      localStorage.setItem('englishProficiencyPDF', fileData);
+    };
+    reader.readAsDataURL(englishProficiencyFile);
+  } else if (englishProficiencyFile) {
+    alert('Please upload a valid PDF file for English Proficiency.');
+  }
+
+  if (schoolReportFile && schoolReportFile.type === 'application/pdf') {
     const reader = new FileReader();
     reader.onload = function(e) {
       const fileData = e.target.result;
       localStorage.setItem('schoolReportPDF', fileData);
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(schoolReportFile);
+  } else if (schoolReportFile) {
+    alert('Please upload a valid PDF file for School Report.');
+  }
+}
+
+function getUniversityURL() {
+  // Get the current URL
+  const currentURL = window.location.href;
+
+  // Use a regular expression to match the /form/university_url pattern
+  const urlPattern = /\/form\/([a-zA-Z0-9-_]+)/;
+
+  // Execute the regex on the current URL
+  const match = currentURL.match(urlPattern);
+
+  // If a match is found, return the university URL
+  if (match && match[1]) {
+    return match[1];
+  } else {
+    // If no match is found, return null or an empty string
+    return null;
   }
 }
 
 async function submitToTheServer() {
-  const formPersonalInfo = new FormData(document.getElementById('formPersonalInfo'));
-  const formAccomplishmentsOne = new FormData(document.getElementById('formAccomplishmentsOne'));
-  const formAccomplishmentsTwo = new FormData(document.getElementById('formAccomplishmentsTwo'));
-  const formFinalization = new FormData(document.getElementById('formFinalization'));
+  const formPersonalInfo = document.getElementById('formPersonalInfo');
+  const formAccomplishmentsOne = document.getElementById('formAccomplishmentsOne');
+  const formAccomplishmentsTwo = document.getElementById('formAccomplishmentsTwo');
+  const formFinalization = document.getElementById('formFinalization');
 
-  const formData = new FormData();
-  formPersonalInfo.forEach((value, key) => formData.append(key, value));
-  formAccomplishmentsOne.forEach((value, key) => formData.append(key, value));
-  formAccomplishmentsTwo.forEach((value, key) => formData.append(key, value));
-  formFinalization.forEach((value, key) => formData.append(key, value));
+  const formData = {};
+
+  // Add data from formPersonalInfo
+  formData.firstName = formPersonalInfo.querySelector('#firstName').value;
+  formData.lastName = formPersonalInfo.querySelector('#lastName').value;
+  formData.email = formPersonalInfo.querySelector('#email').value;
+  formData.phoneCountryCode = formPersonalInfo.querySelector('#phoneCountryCode').value;
+  formData.phoneNumber = formPersonalInfo.querySelector('#phoneNumber').value;
+  formData.sex = formPersonalInfo.querySelector('#sex').value;
+  formData.birthday = formPersonalInfo.querySelector('#birthday').value;
+  formData.race = formPersonalInfo.querySelector('#race').value;
+  formData.countryRegion = formPersonalInfo.querySelector('#countryRegion').value;
+  formData.province = formPersonalInfo.querySelector('#province').value;
+  formData.city = formPersonalInfo.querySelector('#city').value;
+  formData.address = formPersonalInfo.querySelector('#address').value;
+  formData.zipCode = formPersonalInfo.querySelector('#zipCode').value;
+
+  // Add data from formAccomplishmentsOne
+  formData.englishProficiency = formAccomplishmentsOne.querySelector('#englishProficiency').files[0];
+
+  // Add data from formAccomplishmentsTwo
+  formData.schoolName = formAccomplishmentsTwo.querySelector('#schoolName').value;
+  formData.schoolAddress = formAccomplishmentsTwo.querySelector('#address').value;
+  formData.education = formAccomplishmentsTwo.querySelector('#Edu').value;
+  formData.schoolReport = formAccomplishmentsTwo.querySelector('#schoolReport').files[0];
+  formData.schoolCity = formAccomplishmentsTwo.querySelector('#city').value;
+  formData.schoolProvince = formAccomplishmentsTwo.querySelector('#provence').value;
+  formData.schoolZipCode = formAccomplishmentsTwo.querySelector('#zipCode').value;
+
+  // Add data from formFinalization
+  formData.fatherName = formFinalization.querySelector('#fatherName').value;
+  formData.motherName = formFinalization.querySelector('#motherName').value;
+  formData.emergencyEmail = formFinalization.querySelector('#emergencyEmail').value;
+  formData.emergencyPhoneCountryCode = formFinalization.querySelector('#emergencyPhoneCountryCode').value;
+  formData.emergencyPhoneNumber = formFinalization.querySelector('#emergencyPhoneNumber').value;
+
+  const body = JSON.stringify(formData);
+
+  const universityUrl = getUniversityURL();
 
   try {
-    const response = await fetch('/api/apply/uofu', {
+    const response = await fetch(`/api/apply/${universityUrl}`, {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
     });
 
     if (response.ok) {
