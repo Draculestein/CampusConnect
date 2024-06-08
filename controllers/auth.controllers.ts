@@ -1,15 +1,10 @@
 import { Request, Response } from 'express';
 import { User } from '../db/models/User.model';
 import * as argon2 from 'argon2';
-import passport, { DoneCallback, use } from 'passport';
+import passport from 'passport';
 import { Strategy } from 'passport-local';
 import { UserRepository } from '../db/repositories/User.repositories';
 import logger from '../config/logger';
-
-interface UserResult {
-    id: number,
-    email: string
-}
 
 export async function signUpWithEmailAndPassword(req: Request, res: Response) {
     if (!req.body.email)
@@ -61,7 +56,7 @@ passport.use('local-signin',
 
             const verifyResult = await argon2.verify(result?.password!, password);
             if (verifyResult) {
-                const user: UserResult = { id: result.id, email: result.email };
+                const user = { id: result.id, email: result.email };
                 return done(null, user);
             }
             else
@@ -78,7 +73,7 @@ passport.serializeUser((user, done) => {
     done(null, user);
 });
 
-passport.deserializeUser(async (user: UserResult, done) => {
+passport.deserializeUser(async (user: Express.User, done) => {
     try {
         const result = await UserRepository.findOne({
             where: {
