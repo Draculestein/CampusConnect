@@ -91,6 +91,7 @@ apiRouter.post('/apply/:orgUrl', expectLogin, async (req, res) => {
     if (!req.user) return res.status(401).json({ message: 'Unauthorized!' });
 
     const userID = req.user.id;
+    const { orgUrl } = req.params;
 
     logger.info(req.body);
 });
