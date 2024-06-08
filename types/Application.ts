@@ -1,0 +1,28 @@
+export interface IUserApplication {
+        firstName: string,
+        lastName: string,
+        email: string,
+        phoneCountryCode: string,
+        phoneNumber: string
+        sex: string,
+        birthday: string,
+        race: string,
+        countryRegion: string,
+        province: string,
+        city: string,
+        address: string,
+        zipCode: string,
+        englishProficiency: string,
+        schoolName: string,
+        schoolAddress: string,
+        education: string,
+        schoolReport: string,
+        schoolCity: string,
+        schoolProvince: string,
+        schoolZipCode: string,
+        fatherName: string,
+        motherName: string,
+        emergencyEmail: string,
+        emergencyPhoneCountryCode: string,
+        emergencyPhoneNumber: string
+}
