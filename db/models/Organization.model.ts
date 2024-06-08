@@ -24,13 +24,13 @@ export class Organization {
     @Column()
     country: string;
 
-    @Column()
+    @Column({ unique: true })
     url: string;
 
-    @Column()
+    @Column({ unique: true })
     iconUrl: string;
 
-    @Column()
+    @Column({ unique: true })
     backgroundSearchUrl: string;
 
     // Details
