@@ -12,12 +12,13 @@ export class User {
     @Generated('uuid')
     uuid: string;
 
-    @Column()
+    @Column({ unique: true })
     email: string;
 
     @Column({
         type: 'text',
-        nullable: true
+        nullable: true,
+        unique: true
     })
     username: string;
 
