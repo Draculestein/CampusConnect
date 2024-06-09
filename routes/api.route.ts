@@ -4,6 +4,8 @@ import { searchByFilters, searchByName } from '../controllers/search.controllers
 import passport from "passport";
 import logger from "../config/logger";
 import { expectLogin } from "../middleware/auth.middleware";
+import { IUserApplication } from "../types/Application";
+import { applyUserToOrganization } from "../controllers/application.controller";
 
 const apiRouter = Router();
 
@@ -34,7 +36,7 @@ apiRouter.post('/signup', async (req, res, next) => {
     if (success)
         return res.status(200).json({ message: 'Successful signup with email and password!' });
     else
-        return res.status(401).json(error);
+        return res.status(400).json(error);
 });
 
 apiRouter.post('/logout', (req, res, next) => {
@@ -90,11 +92,11 @@ apiRouter.post('/search-filter', async (req, res, next) => {
 
 apiRouter.post('/search-name', async (req, res) => {
     if (!req.body.name)
-        return res.sendStatus(404).json({ message: 'No name property!' });
+        return res.sendStatus(400).json({ message: 'No name property!' });
 
     const [resultArray, error] = await searchByName(req.body.name);
 
-    if (error) return res.status(404).json({ message: 'Error! ' + error });
+    if (error) return res.status(400).json({ message: 'Error! ' + error });
 
     return res.status(200).json(
         resultArray
@@ -109,6 +111,13 @@ apiRouter.post('/apply/:orgUrl', expectLogin, async (req, res) => {
 
     logger.info(req.body);
 
+    const userApplication: IUserApplication = req.body;
 
+    const [success, error] = await applyUserToOrganization(userID, orgUrl, userApplication);
+
+    if (success)
+        return res.status(200);
+    else
+        return res.status(400).json(error);
 });
 export default apiRouter;
