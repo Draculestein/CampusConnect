@@ -59,7 +59,7 @@ async function bootstrap() {
         await AppDataSource.initialize();
         logger.info("Data Source has been initialized!");
         if(process.env.DEV_MODE! === 'true') {
-            logger.info('Dev mode : on. Inputting dummy data!')
+            logger.info('Dev mode is on. Inputting dummy data!')
             runTestData();
         }
     } catch (error) {
