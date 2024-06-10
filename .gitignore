@@ -66,11 +66,8 @@ dist/*
 # SQLite db
 *.sqlite
 
-# MySQL Container Storage
-data/mysql/*
-
-# Keys
-thinkspace-d7f77-firebase-adminsdk-wvoz9-4260183b3c.json
+# Temp data
+data/*
 
 # Devenv
 .devenv*
