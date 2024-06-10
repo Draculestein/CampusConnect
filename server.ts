@@ -11,16 +11,40 @@ import registerRoutes from "./routes/route"
 import logger from "./logger/logger";
 import passport from "passport";
 import { runTestData } from './db/testData/runTestData';
+import { initializeBucket } from './s3/s3';
+
+let successfulSetup = true;
 
 AppDataSource.initialize()
     .then(() => {
         logger.info("Data Source has been initialized!");
-        runTestData();
-
+        if (process.env.DEV_MODE! === '1') runTestData();
     })
     .catch((err) => {
-        logger.error("Error during Data Source initialization:", err);
+        logger.error("Error during Data Source initialization: " + err);
+        successfulSetup = successfulSetup && false;
     });
+
+initializeBucket()
+    .then(([isSuccessful, error]) => {
+        if (isSuccessful) { 
+            logger.info('Bucket is ready!'); 
+            return;
+        }
+
+        logger.error('Error when initializing bucket: ' + error);
+        successfulSetup = successfulSetup && false;
+    })
+    .catch((error) => {
+        logger.error('Error when initializing bucket: ' + error);
+        successfulSetup = successfulSetup && false;
+
+    })
+
+if(!successfulSetup) {
+    logger.error('Fail to setup connection to database and/or bucket! Aborting Express!');
+    process.exit();
+}
 
 const app = express();
 const port = process.env.PORT || 3000; // default port to listen
