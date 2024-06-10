@@ -1,5 +1,5 @@
 import { Organization } from '../db/models/Organization.model';
-import logger from '../config/logger';
+import logger from '../logger/logger';
 import { OrganizationRepository } from '../db/repositories/Organization.repositories';
 
 const numberPerPage = 5;

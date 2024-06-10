@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { expectLogin } from '../middleware/auth.middleware';
-import logger from "../config/logger";
+import logger from "../logger/logger";
 import { searchByUrl } from "../controllers/search.controllers";
 
 const viewsRouter = Router();

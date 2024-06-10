@@ -8,7 +8,7 @@ import { SessionRepository } from "./db/repositories/Session.repositories";
 import morganMiddleware from "./middleware/morgan.middleware";
 import { AppDataSource } from './db/db'
 import registerRoutes from "./routes/route"
-import logger from "./config/logger";
+import logger from "./logger/logger";
 import passport from "passport";
 import { runTestData } from './db/testData/runTestData';
 

@@ -4,7 +4,7 @@ import * as argon2 from 'argon2';
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 import { UserRepository } from '../db/repositories/User.repositories';
-import logger from '../config/logger';
+import logger from '../logger/logger';
 
 export async function signUpWithEmailAndPassword(email: string, password: string): Promise<[boolean, any]> {
     try {

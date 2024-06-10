@@ -2,7 +2,7 @@ import { Router } from "express";
 import { signUpWithEmailAndPassword } from '../controllers/auth.controllers';
 import { searchByFilters, searchByName } from '../controllers/search.controllers';
 import passport from "passport";
-import logger from "../config/logger";
+import logger from "../logger/logger";
 import { expectLogin } from "../middleware/auth.middleware";
 import { IUserApplication } from "../types/Application";
 import { applyUserToOrganization } from "../controllers/application.controller";

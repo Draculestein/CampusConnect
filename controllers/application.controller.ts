@@ -1,5 +1,5 @@
 import { IUserApplication } from '../types/Application';
-import logger from '../config/logger';
+import logger from '../logger/logger';
 import { UserRepository } from '../db/repositories/User.repositories';
 import { OrganizationRepository } from '../db/repositories/Organization.repositories';
 import { Application } from '../db/models/Application.model';
