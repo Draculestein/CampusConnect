@@ -3,6 +3,8 @@ import {
     S3ClientConfig,
     ListBucketsCommand,
     CreateBucketCommand,
+    PutObjectCommandInput,
+    PutObjectCommand,
 
 } from "@aws-sdk/client-s3";
 import logger from '../logger/logger';
@@ -20,21 +22,42 @@ const s3Config: S3ClientConfig = {
 };
 
 const s3Client = new S3Client(s3Config);
+const bucketName = process.env.BUCKET_NAME;
 
 export async function initializeBucket(): Promise<[boolean, any]> {
     try {
         // Check if the CampusConnect bucket exists
         const bucketsList = await s3Client.send(new ListBucketsCommand());
 
-        if (bucketsList.Buckets && (bucketsList.Buckets?.find((bucket) => bucket.Name === process.env.BUCKET_NAME)))
+        if (bucketsList.Buckets && (bucketsList.Buckets?.find((bucket) => bucket.Name === bucketName)))
             return [true, null];
 
         await s3Client.send(new CreateBucketCommand({
-            Bucket: process.env.BUCKET_NAME
+            Bucket: bucketName
         }));
 
         return [true, null];
-    } catch(error) {
+    } catch (error) {
+        logger.error(error);
+        return [false, error];
+    }
+}
+
+export async function uploadFile(inBucketPath: string, fileContent: Buffer): Promise<[boolean, any]>  {
+    try {
+        const input: PutObjectCommandInput = {
+            Bucket: bucketName,
+            Key: inBucketPath,
+            Body: fileContent
+        }
+
+        const result = await s3Client.send(new PutObjectCommand(input));
+
+        if(result.$metadata.httpStatusCode === 200)
+            return [true, null];
+        else
+            return [false, result.$metadata];
+    } catch (error) {
         logger.error(error);
         return [false, error];
     }
