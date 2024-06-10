@@ -10,6 +10,7 @@ import logger from '../logger/logger';
 
 // Temp S3 config for dev purposes
 const s3Config: S3ClientConfig = {
+    region: 'us-east-1',
     endpoint: 'http://localhost:9000',
     credentials: {
         accessKeyId: process.env.MINIO_ROOT_USER!,
@@ -25,11 +26,11 @@ export async function initializeBucket(): Promise<[boolean, any]> {
         // Check if the CampusConnect bucket exists
         const bucketsList = await s3Client.send(new ListBucketsCommand());
 
-        if (bucketsList.Buckets && (bucketsList.Buckets?.find((bucket) => bucket.Name === 'CampusConnect'))) 
+        if (bucketsList.Buckets && (bucketsList.Buckets?.find((bucket) => bucket.Name === process.env.BUCKET_NAME)))
             return [true, null];
 
         await s3Client.send(new CreateBucketCommand({
-            Bucket: 'CampusConnect'
+            Bucket: process.env.BUCKET_NAME
         }));
 
         return [true, null];
