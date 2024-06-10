@@ -12,6 +12,8 @@
 
   # https://devenv.sh/scripts/
   scripts.hello.exec = "echo 'CampusConnect Dev Shell'";
+  scripts.compu.exec = "docker compose up -d";
+  scripts.compd.exec = "docker compose down";
 
   enterShell = ''
     hello
