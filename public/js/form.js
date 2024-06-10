@@ -886,6 +886,17 @@ function savePDFToLocalStorage() {
   } else if (schoolReportFile) {
     alert('Please upload a valid PDF file for School Report.');
   }
+
+  // Remove unnecessary fields from localStorage
+  if (formAccomplishmentsOne.englishproficiency) {
+    delete formAccomplishmentsOne.englishproficiency;
+    localStorage.setItem('formAccomplishmentsOne', JSON.stringify(formAccomplishmentsOne));
+  }
+
+  if (formAccomplishmentsTwo.schoolreport) {
+    delete formAccomplishmentsTwo.schoolreport;
+    localStorage.setItem('formAccomplishmentsTwo', JSON.stringify(formAccomplishmentsTwo));
+  }
 }
 
 function getUniversityURL() {
