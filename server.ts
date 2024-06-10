@@ -58,7 +58,10 @@ async function bootstrap() {
     try {
         await AppDataSource.initialize();
         logger.info("Data Source has been initialized!");
-        if (process.env.DEV_MODE! === '1') runTestData();
+        if(process.env.DEV_MODE! === 'true') {
+            logger.info('Dev mode : on. Inputting dummy data!')
+            runTestData();
+        }
     } catch (error) {
         logger.error("Error during Data Source initialization: " + error);
         successfulSetup = successfulSetup && false;
