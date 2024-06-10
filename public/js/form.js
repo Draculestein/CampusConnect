@@ -931,13 +931,34 @@ async function submitToTheServer() {
   formData.zipCode = formPersonalInfo.querySelector('#zipCode').value;
 
   // Add data from formAccomplishmentsOne
-  formData.englishProficiency = formAccomplishmentsOne.querySelector('#englishProficiencyInput').files[0];
+  const englishProficiencyFile = formAccomplishmentsOne.querySelector('#englishProficiencyInput').files[0];
+  if (englishProficiencyFile && englishProficiencyFile.type === 'application/pdf') {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      formData.englishProficiency = reader.result;
+      console.log('English:', formData.englishProficiency);
+    };
+    reader.readAsDataURL(englishProficiencyFile);
+  } else if (!englishProficiencyFile) {
+    alert('Please upload a valid PDF file for English Proficiency.');
+  }
 
   // Add data from formAccomplishmentsTwo
   formData.schoolName = formAccomplishmentsTwo.querySelector('#schoolName').value;
   formData.schoolAddress = formAccomplishmentsTwo.querySelector('#address').value;
   formData.education = formAccomplishmentsTwo.querySelector('#Edu').value;
-  formData.schoolReport = formAccomplishmentsTwo.querySelector('#schoolReport').files[0];
+  const schoolReportFile = formAccomplishmentsTwo.querySelector('#schoolReport').files[0];
+  if (schoolReportFile && schoolReportFile.type === 'application/pdf') {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      formData.schoolReport = reader.result;
+      console.log('School:', formData.schoolReport);
+    };
+    reader.readAsDataURL(schoolReportFile);
+  } else if (!schoolReportFile) {
+    alert('Please upload a valid PDF file for School Report.');
+  }
+
   formData.schoolCity = formAccomplishmentsTwo.querySelector('#city').value;
   formData.schoolProvince = formAccomplishmentsTwo.querySelector('#provence').value;
   formData.schoolZipCode = formAccomplishmentsTwo.querySelector('#zipCode').value;
