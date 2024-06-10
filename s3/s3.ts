@@ -20,21 +20,21 @@ const s3Config: S3ClientConfig = {
 
 const s3Client = new S3Client(s3Config);
 
-export async function initializeBucket(): Promise<boolean> {
+export async function initializeBucket(): Promise<[boolean, any]> {
     try {
         // Check if the CampusConnect bucket exists
         const bucketsList = await s3Client.send(new ListBucketsCommand());
 
         if (bucketsList.Buckets && (bucketsList.Buckets?.find((bucket) => bucket.Name === 'CampusConnect'))) 
-            return true;
+            return [true, null];
 
         await s3Client.send(new CreateBucketCommand({
             Bucket: 'CampusConnect'
         }));
 
-        return true
+        return [true, null];
     } catch(error) {
         logger.error(error);
-        return false;
+        return [false, error];
     }
 }
