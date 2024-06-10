@@ -11,9 +11,22 @@ import { Application } from './models/Application.model';
 import "reflect-metadata"
 
 
+// export const AppDataSource = new DataSource({
+//     type: 'sqlite',
+//     database: 'dev.sqlite',
+//     entities: [User, Organization, Program, Demography, Permission, Role, Session, Application],
+//     logging: ['error'],
+//     logger: 'advanced-console',
+//     synchronize: true,
+//     dropSchema: true
+// });
+
 export const AppDataSource = new DataSource({
-    type: 'sqlite',
-    database: 'dev.sqlite',
+    type: 'mysql',
+    host: 'localhost',
+    username: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DB_NAME,
     entities: [User, Organization, Program, Demography, Permission, Role, Session, Application],
     logging: ['error'],
     logger: 'advanced-console',
