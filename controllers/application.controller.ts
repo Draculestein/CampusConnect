@@ -19,11 +19,14 @@ export async function applyUserToOrganization(user: User, orgUrl: string, applic
         const englishProficiencyBuffer = Buffer.from(englishProficiencyBase64, 'base64');
         const schoolReportBuffer = Buffer.from(schoolReportBase64, 'base64');
 
-        const [englishProficiencySuccessful, englishProficiencyError] = await uploadFile(`${organization.id}/${user.uuid}/${applicationObj.englishProficiencyFileName}`, englishProficiencyBuffer);
-        if(!englishProficiencySuccessful) return [false, englishProficiencyError];
+        const englishProficiencyPath = `${organization.id}/${user.uuid}/${applicationObj.englishProficiencyFileName}`;
+        const schoolReportPath = `${organization.id}/${user.uuid}/${applicationObj.schoolReportFileName}`;
 
-        const [schoolReportSuccessful, schoolReportError] = await uploadFile(`${organization.id}/${user.uuid}/${applicationObj.schoolReportFileName}`, schoolReportBuffer);
-        if(!schoolReportSuccessful) return [false, schoolReportError];
+        const [englishProficiencyUploadSuccessful, englishProficiencyUploadError] = await uploadFile(englishProficiencyPath, englishProficiencyBuffer);
+        if(!englishProficiencyUploadSuccessful) return [false, englishProficiencyUploadError];
+
+        const [schoolReportUploadSuccessful, schoolReportUploadError] = await uploadFile(schoolReportPath, schoolReportBuffer);
+        if(!schoolReportUploadSuccessful) return [false, schoolReportUploadError];
 
         const application = new Application();
         application.user = user;
@@ -41,12 +44,12 @@ export async function applyUserToOrganization(user: User, orgUrl: string, applic
         application.city = applicationObj.city;
         application.address = applicationObj.address;
         application.zip = applicationObj.zipCode;
-        application.englishProficiencyReportPath = '/englishReport';
+        application.englishProficiencyReportPath = englishProficiencyPath;
         application.schoolName = applicationObj.schoolName;
         application.schoolAddress = applicationObj.schoolAddress;
         application.educationLevel = applicationObj.education;
         application.schoolCity = applicationObj.schoolCity;
-        application.schoolReportPath = '/schoolReportPath';
+        application.schoolReportPath = schoolReportPath;
         application.schoolProvince = applicationObj.schoolProvince;
         application.schoolZip = applicationObj.schoolZipCode;
         application.fatherName = applicationObj.fatherName;
