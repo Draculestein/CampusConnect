@@ -983,7 +983,6 @@ async function submitToTheServer() {
     if (englishProficiencyFile && englishProficiencyFile.type === 'application/pdf') {
       formData.englishProficiency = await readFileAsDataURL(englishProficiencyFile);
       formData.englishProficiencyFileName = englishProficiencyFile.name;
-      console.log('English:', formData.englishProficiency);
     } else if (!englishProficiencyFile) {
       alert('Please upload a valid PDF file for English Proficiency.');
       return;
@@ -997,7 +996,6 @@ async function submitToTheServer() {
     if (schoolReportFile && schoolReportFile.type === 'application/pdf') {
       formData.schoolReport = await readFileAsDataURL(schoolReportFile);
       formData.schoolReportFileName = schoolReportFile.name;
-      console.log('School:', formData.schoolReport);
     } else if (!schoolReportFile) {
       alert('Please upload a valid PDF file for School Report.');
       return;
