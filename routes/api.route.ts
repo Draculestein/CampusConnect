@@ -6,6 +6,7 @@ import logger from "../logger/logger";
 import { expectLogin } from "../middleware/auth.middleware";
 import { IUserApplication } from "../types/Application";
 import { applyUserToOrganization } from "../controllers/application.controller";
+import { User } from "../db/models/User.model";
 
 const apiRouter = Router();
 
@@ -106,14 +107,12 @@ apiRouter.post('/search-name', async (req, res) => {
 apiRouter.post('/apply/:orgUrl', expectLogin, async (req, res) => {
     if (!req.user) return res.status(401).json({ message: 'Unauthorized!' });
 
-    const userID = req.user.id;
+    const user = (req.user) as User;
     const { orgUrl } = req.params;
-
-    logger.info(req.body);
 
     const userApplication: IUserApplication = req.body;
 
-    const [success, error] = await applyUserToOrganization(userID, orgUrl, userApplication);
+    const [success, error] = await applyUserToOrganization(user, orgUrl, userApplication);
 
     if (success)
         return res.status(200);

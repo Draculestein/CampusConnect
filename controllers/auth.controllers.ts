@@ -48,8 +48,7 @@ passport.use('local-signin',
 
             const verifyResult = await argon2.verify(result?.password!, password);
             if (verifyResult) {
-                const user = { id: result.id, email: result.email };
-                return done(null, user);
+                return done(null, result);
             }
             else
                 return done(null, false, { message: 'Incorrect username or password.' });
