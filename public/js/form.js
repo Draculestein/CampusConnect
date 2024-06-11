@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+  deleteOldData(); // Clean up old data on page load
   loadFormData('formPersonalInfo');
   loadFormData('formAccomplishmentsOne');
   loadFormData('formAccomplishmentsTwo');
@@ -792,12 +793,17 @@ document.getElementById('okButton').addEventListener('click', function() {
 });
 
 function saveFormData(formId) {
+  deleteOldData(); // Clean up old data before saving new data
   const form = document.getElementById(formId);
   const formData = new FormData(form);
   const formObject = {};
+  const currentTime = new Date().getTime();
+
   formData.forEach((value, key) => {
     formObject[key] = value;
   });
+  formObject.timestamp = currentTime; // Add timestamp
+
   if (formId === 'formPersonalInfo') {
     formObject.sex = document.getElementById('sex').value;
     formObject.race = document.getElementById('race').value;
@@ -929,7 +935,26 @@ async function readFileAsDataURL(file) {
   });
 }
 
+function deleteOldData() {
+  const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
+  const currentTime = new Date().getTime();
+
+  const keys = ['formPersonalInfo', 'formAccomplishmentsOne', 'formAccomplishmentsTwo', 'formFinalization'];
+
+  keys.forEach(key => {
+    const item = JSON.parse(localStorage.getItem(key));
+    if (item && item.timestamp) {
+      const itemTime = item.timestamp;
+      if (currentTime - itemTime > oneWeekInMilliseconds) {
+        localStorage.removeItem(key);
+      }
+    }
+  });
+}
+
 async function submitToTheServer() {
+  deleteOldData(); // Clean up old data before form submission
+
   const formPersonalInfo = document.getElementById('formPersonalInfo');
   const formAccomplishmentsOne = document.getElementById('formAccomplishmentsOne');
   const formAccomplishmentsTwo = document.getElementById('formAccomplishmentsTwo');
