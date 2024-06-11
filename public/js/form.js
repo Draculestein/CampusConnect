@@ -867,10 +867,11 @@ function savePDFToLocalStorage() {
     const reader = new FileReader();
     reader.onload = function (e) {
       formAccomplishmentsOne.englishProficiencyPDF = e.target.result;
+      formAccomplishmentsOne.englishProficiencyFileName = englishProficiencyFile.name;
       localStorage.setItem('formAccomplishmentsOne', JSON.stringify(formAccomplishmentsOne));
     };
     reader.readAsDataURL(englishProficiencyFile);
-  } else if (englishProficiencyFile) {
+  } else if (!englishProficiencyFile) {
     alert('Please upload a valid PDF file for English Proficiency.');
   }
 
@@ -880,10 +881,11 @@ function savePDFToLocalStorage() {
     const reader = new FileReader();
     reader.onload = function (e) {
       formAccomplishmentsTwo.schoolReportPDF = e.target.result;
+      formAccomplishmentsTwo.schoolReportFileName = schoolReportFile.name;
       localStorage.setItem('formAccomplishmentsTwo', JSON.stringify(formAccomplishmentsTwo));
     };
     reader.readAsDataURL(schoolReportFile);
-  } else if (schoolReportFile) {
+  } else if (!schoolReportFile) {
     alert('Please upload a valid PDF file for School Report.');
   }
 
@@ -955,6 +957,7 @@ async function submitToTheServer() {
     const englishProficiencyFile = formAccomplishmentsOne.querySelector('#englishProficiencyInput').files[0];
     if (englishProficiencyFile && englishProficiencyFile.type === 'application/pdf') {
       formData.englishProficiency = await readFileAsDataURL(englishProficiencyFile);
+      formData.englishProficiencyFileName = englishProficiencyFile.name;
       console.log('English:', formData.englishProficiency);
     } else if (!englishProficiencyFile) {
       alert('Please upload a valid PDF file for English Proficiency.');
@@ -968,6 +971,7 @@ async function submitToTheServer() {
     const schoolReportFile = formAccomplishmentsTwo.querySelector('#schoolReport').files[0];
     if (schoolReportFile && schoolReportFile.type === 'application/pdf') {
       formData.schoolReport = await readFileAsDataURL(schoolReportFile);
+      formData.schoolReportFileName = schoolReportFile.name;
       console.log('School:', formData.schoolReport);
     } else if (!schoolReportFile) {
       alert('Please upload a valid PDF file for School Report.');
