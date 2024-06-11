@@ -1,17 +1,29 @@
 import { IUserApplication } from '../types/Application';
 import logger from '../logger/logger';
-import { UserRepository } from '../db/repositories/User.repositories';
 import { OrganizationRepository } from '../db/repositories/Organization.repositories';
 import { Application } from '../db/models/Application.model';
 import { ApplicationRepository } from '../db/repositories/Application.repositories';
+import { uploadFile } from '../s3/s3';
+import { User } from '../db/models/User.model';
 
-export async function applyUserToOrganization(userID: number, orgUrl: string, applicationObj: IUserApplication): Promise<[boolean, any]> {
+export async function applyUserToOrganization(user: User, orgUrl: string, applicationObj: IUserApplication): Promise<[boolean, any]> {
     try {
-        const user = await UserRepository.findOne({ where: { id: userID } });
         const organization = await OrganizationRepository.findOne({ where: { url: orgUrl } });
 
         if (!user) return [false, { message: 'User not found!' }];
         if (!organization) return [false, { message: 'Organization not found!' }];
+
+        const englishProficiencyBase64 = applicationObj.englishProficiency.split(';base64,')[1];
+        const schoolReportBase64 = applicationObj.schoolReport.split(';base64,')[1];
+
+        const englishProficiencyBuffer = Buffer.from(englishProficiencyBase64, 'base64');
+        const schoolReportBuffer = Buffer.from(schoolReportBase64, 'base64');
+
+        const [englishProficiencySuccessful, englishProficiencyError] = await uploadFile(`${organization.id}/${user.uuid}/${applicationObj.englishProficiencyFileName}`, englishProficiencyBuffer);
+        if(!englishProficiencySuccessful) return [false, englishProficiencyError];
+
+        const [schoolReportSuccessful, schoolReportError] = await uploadFile(`${organization.id}/${user.uuid}/${applicationObj.schoolReportFileName}`, schoolReportBuffer);
+        if(!schoolReportSuccessful) return [false, schoolReportError];
 
         const application = new Application();
         application.user = user;
