@@ -88,4 +88,5 @@ The main files and directories are displayed below.
 
 ## Additional Information
 
+All code in the main branch, except for files in the public folder, is written by @Draculestein(Albert Theodorus).
 To populate countries and states data, we used data from [dr5hn's countries, states, and cities database](https://github.com/dr5hn/countries-states-cities-database).
