@@ -1,4 +1,4 @@
-# Campus Connect
+# Campus Connect (Retired and no longer worked on)
 
 ## Table of Content
 - [Project Architecture](#project-architecture)
